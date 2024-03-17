@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Aikataulus</string>
+
+    <!-- Exceptions -->
+    <string name="exception_too_many_requests">Exceeded the number of request attempts</string>
+    <string name="exception_not_authorized">You are not logged in</string>
+    <string name="exception_bad_request">Incorrect request</string>
+    <string name="exception_not_found">Specified wasn\'t found</string>
+    <string name="exception_unexpected_server">Unexpected error on the server side</string>
+    <string name="unknown_error">Unexpected exception</string>
 </resources>

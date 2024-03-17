@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aikataulus</string>
+    <string name="exception_too_many_requests">Превышено количество попыток запроса</string>
+    <string name="exception_not_authorized">"Вы не вошли в систему "</string>
+    <string name="exception_bad_request">Неверный запрос</string>
+    <string name="exception_not_found">Указанное не было найден</string>
+    <string name="exception_unexpected_server">"Непредвиденная ошибка на стороне сервера "</string>
+    <string name="unknown_error">Непредвиденная ошибка</string>
+</resources>
