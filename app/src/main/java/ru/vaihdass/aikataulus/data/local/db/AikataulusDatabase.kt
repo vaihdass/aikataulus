@@ -16,7 +16,6 @@ import ru.vaihdass.aikataulus.data.local.db.entity.converter.DateConverter
     ],
     version = 1,
 )
-
 @TypeConverters(DateConverter::class)
 abstract class AikataulusDatabase : RoomDatabase() {
     abstract val eventDao: EventDao

@@ -1,4 +1,4 @@
-package ru.vaihdass.aikataulus.data.local
+package ru.vaihdass.aikataulus.data.local.di
 
 import android.content.Context
 import androidx.room.Room
@@ -20,6 +20,12 @@ class DatabaseModule {
             )
             .build()
     }
+
+    @Provides
+    fun provideEventDao(db: AikataulusDatabase) = db.eventDao
+
+    @Provides
+    fun provideTaskDao(db: AikataulusDatabase) = db.taskDao
 
     /*
     TODO: Provide dao for tasks and events

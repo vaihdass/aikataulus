@@ -16,14 +16,15 @@ android {
 
     defaultConfig {
         applicationId = "ru.vaihdass.aikataulus"
-        minSdk = 26
+        minSdk = 34
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_BASE_URL", "\"https://aikataulus.ru/\"")
+        buildConfigField("String", "AIKATAULUS_API_BASE_URL", "\"https://aikataulus.ru/\"")
+        buildConfigField("String", "GOOGLE_TASKS_API_BASE_URL", "\"https://tasks.googleapis.com\"")
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -59,6 +60,10 @@ android {
         buildConfig = true
         viewBinding = true
     }
+
+    packaging {
+        resources.excludes.add("META-INF/DEPENDENCIES")
+    }
 }
 
 dependencies {
@@ -68,16 +73,16 @@ dependencies {
     val constraintLayoutVersion = "2.1.4"
     implementation("androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}")
 
-    val fragmentVersion = "1.6.2"
+    val fragmentVersion = "1.7.0"
     implementation("androidx.fragment:fragment-ktx:${fragmentVersion}")
 
-    val coreCtxVersion = "1.12.0"
+    val coreCtxVersion = "1.13.1"
     implementation("androidx.core:core-ktx:$coreCtxVersion")
 
     val appcompatVersion = "1.6.1"
     implementation("androidx.appcompat:appcompat:$appcompatVersion")
 
-    val androidMaterialVersion = "1.11.0"
+    val androidMaterialVersion = "1.12.0"
     implementation("com.google.android.material:material:$androidMaterialVersion")
 
     val viewBindingDelegateVersion = "1.5.9"
@@ -115,8 +120,15 @@ dependencies {
     implementation("com.google.dagger:dagger:$daggerVersion")
     "kapt"("com.google.dagger:dagger-compiler:$daggerVersion")
 
+    val credentialManagerVersion = "1.3.0-alpha03"
+    implementation("androidx.credentials:credentials:$credentialManagerVersion")
+    implementation("androidx.credentials:credentials-play-services-auth:$credentialManagerVersion")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
+
     val googleTasksVersion = "v1-rev71-1.25.0"
-    implementation("com.google.apis:google-api-services-tasks:$googleTasksVersion")
+    implementation("com.google.apis:google-api-services-tasks:$googleTasksVersion") {
+        exclude(group = "com.google.guava", module = "guava")
+    }
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

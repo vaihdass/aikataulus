@@ -9,10 +9,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.vaihdass.aikataulus.BuildConfig
+import ru.vaihdass.aikataulus.data.remote.api.AikataulusApi
+import ru.vaihdass.aikataulus.data.remote.api.TasksApi
 import ru.vaihdass.aikataulus.data.remote.interceptor.JsonInterceptor
-import ru.vaihdass.aikataulus.data.remote.pojo.TaskStatus
 import ru.vaihdass.aikataulus.data.remote.serializer.DateDeserializer
 import ru.vaihdass.aikataulus.data.remote.serializer.TaskStatusDeserializer
+import ru.vaihdass.aikataulus.data.remote.util.TaskStatus
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import java.util.Date
@@ -45,17 +47,31 @@ class NetworkModule {
     fun provideAikataulusApi(okHttpClient: OkHttpClient): AikataulusApi {
         val gson = GsonBuilder()
             .registerTypeAdapter(Date::class.java, DateDeserializer())
-            .registerTypeAdapter(TaskStatus::class.java, TaskStatusDeserializer())
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
+            .baseUrl(BuildConfig.AIKATAULUS_API_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(AikataulusApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideTasksApi(okHttpClient: OkHttpClient): TasksApi {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(Date::class.java, DateDeserializer())
+            .registerTypeAdapter(TaskStatus::class.java, TaskStatusDeserializer())
+            .create()
+
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.GOOGLE_TASKS_API_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(TasksApi::class.java)
+    }
 
     // Only for debug!
     private fun createUnsafeClient(): OkHttpClient.Builder {

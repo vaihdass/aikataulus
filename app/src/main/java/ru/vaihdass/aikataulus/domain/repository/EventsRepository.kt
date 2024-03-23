@@ -1,6 +1,5 @@
 package ru.vaihdass.aikataulus.domain.repository
 
-import ru.vaihdass.aikataulus.data.remote.pojo.EventsResponse
 import ru.vaihdass.aikataulus.domain.model.EventDomainModel
 
 interface EventsRepository {
