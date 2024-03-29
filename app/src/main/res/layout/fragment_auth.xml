@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
-    android:id="@+id/nsv_greeting"
+    android:id="@+id/nsv_auth"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".presentation.screen.greeting.GreetingFragment"
-    android:background="#353535">
+    tools:context=".presentation.screen.auth.AuthFragment"
+    android:background="#212121">
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/fragment_layout_greeting"
+    android:id="@+id/fragment_layout_auth"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
@@ -19,14 +19,14 @@
     app:layout_constraintBottom_toBottomOf="parent">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_get"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginVertical="48dp"
-        android:text="Get tasklists"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/auth_login"
         android:backgroundTint="@color/white"
         android:textColor="@color/black"
         android:textAlignment="center"
@@ -37,22 +37,6 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:letterSpacing="0.08"/>
-
-    <TextView
-        android:id="@+id/tv_temp_output"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_get"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="24dp"
-        app:layout_constraintVertical_bias="0.05"
-        android:text="Hello!"
-        android:textColor="@color/white"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

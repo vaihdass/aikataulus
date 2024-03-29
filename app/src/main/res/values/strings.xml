@@ -8,4 +8,9 @@
     <string name="exception_not_found">Specified wasn\'t found</string>
     <string name="exception_unexpected_server">Unexpected error on the server side</string>
     <string name="unknown_error">Unexpected exception</string>
+    <string name="auth_cancelled">Authentication failed</string>
+    <string name="auth_login">Log in</string>
+    <string name="corrupt_access_token">Corrupted access token</string>
+    <string name="auth_logout">Logout</string>
+    <string name="auth_refresh_failed">Authorization error, you are logged out</string>
 </resources>

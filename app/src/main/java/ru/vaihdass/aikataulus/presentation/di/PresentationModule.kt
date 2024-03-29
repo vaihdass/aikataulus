@@ -1,12 +1,11 @@
 package ru.vaihdass.aikataulus.presentation.di
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
-import ru.vaihdass.aikataulus.presentation.utils.ViewModelFactory
+import ru.vaihdass.aikataulus.presentation.screen.auth.AuthViewModel
+import ru.vaihdass.aikataulus.presentation.screen.greeting.GreetingViewModel
 
 @Module(
     includes = [
@@ -14,9 +13,13 @@ import ru.vaihdass.aikataulus.presentation.utils.ViewModelFactory
         ViewModelModule::class,
     ],
 )
-interface PresentationModule {
-    /* TODO: Add view models for screens
+class PresentationModule {
+
     @Provides
-    @[IntoMap ViewModelKey(SomeViewModel::class)]
-    fun provideWeatherMainViewModel(viewModel: SomeViewModel): ViewModel = viewModel*/
+    @[IntoMap ViewModelKey(GreetingViewModel::class)]
+    fun provideGreetingViewModel(viewModel: GreetingViewModel): ViewModel = viewModel
+
+    @Provides
+    @[IntoMap ViewModelKey(AuthViewModel::class)]
+    fun provideAuthViewModel(viewModel: AuthViewModel): ViewModel = viewModel
 }

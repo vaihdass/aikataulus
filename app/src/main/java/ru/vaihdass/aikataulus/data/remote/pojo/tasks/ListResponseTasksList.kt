@@ -1,6 +1,6 @@
 package ru.vaihdass.aikataulus.data.remote.pojo.tasks
 
-class ListResponseTasksList(
-    error: Status?,
-    items: List<TaskList>?,
+data class ListResponseTasksList(
+    var error: Status?,
+    var items: List<TaskList>?,
 )

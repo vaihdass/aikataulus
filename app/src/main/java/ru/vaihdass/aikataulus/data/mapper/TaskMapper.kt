@@ -6,7 +6,7 @@ import ru.vaihdass.aikataulus.data.remote.util.TaskStatus
 import ru.vaihdass.aikataulus.domain.model.TaskDomainModel
 import javax.inject.Inject
 
-class TasksMapper @Inject constructor() {
+class TaskMapper @Inject constructor() {
     fun map(response: List<Task>?): List<TaskDomainModel>? {
         return response?.let {
             it.map { task -> mapNotNull(task) }

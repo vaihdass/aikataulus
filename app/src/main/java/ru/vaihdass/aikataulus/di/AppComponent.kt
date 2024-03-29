@@ -7,6 +7,7 @@ import ru.vaihdass.aikataulus.data.di.DataModule
 import ru.vaihdass.aikataulus.domain.di.DomainModule
 import ru.vaihdass.aikataulus.presentation.MainActivity
 import ru.vaihdass.aikataulus.presentation.di.PresentationModule
+import ru.vaihdass.aikataulus.presentation.screen.auth.AuthFragment
 import ru.vaihdass.aikataulus.presentation.screen.greeting.GreetingFragment
 import javax.inject.Singleton
 
@@ -28,4 +29,5 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
     fun inject(fragment: GreetingFragment)
+    fun inject(fragment: AuthFragment)
 }

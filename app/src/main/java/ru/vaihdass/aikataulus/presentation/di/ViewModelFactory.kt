@@ -1,4 +1,4 @@
-package ru.vaihdass.aikataulus.presentation.utils
+package ru.vaihdass.aikataulus.presentation.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

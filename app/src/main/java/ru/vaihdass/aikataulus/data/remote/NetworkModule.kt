@@ -11,6 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.vaihdass.aikataulus.BuildConfig
 import ru.vaihdass.aikataulus.data.remote.api.AikataulusApi
 import ru.vaihdass.aikataulus.data.remote.api.TasksApi
+import ru.vaihdass.aikataulus.data.remote.interceptor.AuthorizationFailedInterceptor
+import ru.vaihdass.aikataulus.data.remote.interceptor.AuthorizationInterceptor
 import ru.vaihdass.aikataulus.data.remote.interceptor.JsonInterceptor
 import ru.vaihdass.aikataulus.data.remote.serializer.DateDeserializer
 import ru.vaihdass.aikataulus.data.remote.serializer.TaskStatusDeserializer
@@ -26,13 +28,19 @@ import javax.net.ssl.X509TrustManager
 @Module
 class NetworkModule {
     @Provides
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(
+        jsonInterceptor: JsonInterceptor,
+        authorizationFailedInterceptor: AuthorizationFailedInterceptor,
+        authorizationInterceptor: AuthorizationInterceptor,
+    ): OkHttpClient {
         val clientBuilder = if (BuildConfig.DEBUG) {
             createUnsafeClient()
         } else {
             OkHttpClient.Builder()
         }
-            .addInterceptor(JsonInterceptor())
+            .addInterceptor(jsonInterceptor)
+            .addInterceptor(authorizationFailedInterceptor)
+            .addInterceptor(authorizationInterceptor)
 
         if (BuildConfig.DEBUG) {
             clientBuilder.addInterceptor(HttpLoggingInterceptor().apply {

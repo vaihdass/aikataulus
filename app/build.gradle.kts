@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.vaihdass.aikataulus"
-        minSdk = 34
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -24,7 +24,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "AIKATAULUS_API_BASE_URL", "\"https://aikataulus.ru/\"")
-        buildConfigField("String", "GOOGLE_TASKS_API_BASE_URL", "\"https://tasks.googleapis.com\"")
+        buildConfigField("String", "GOOGLE_TASKS_API_BASE_URL", "\"https://tasks.googleapis.com/\"")
+
+        manifestPlaceholders["appAuthRedirectScheme"] = "ru.vaihdass.aikataulus"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -32,7 +34,6 @@ android {
                     "room.schemaLocation" to "$projectDir/schemas",
                     "room.incremental" to "true"
                 )
-
             }
         }
     }
@@ -120,15 +121,10 @@ dependencies {
     implementation("com.google.dagger:dagger:$daggerVersion")
     "kapt"("com.google.dagger:dagger-compiler:$daggerVersion")
 
-    val credentialManagerVersion = "1.3.0-alpha03"
-    implementation("androidx.credentials:credentials:$credentialManagerVersion")
-    implementation("androidx.credentials:credentials-play-services-auth:$credentialManagerVersion")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
+    val appAuthVersion = "0.11.1"
+    implementation("net.openid:appauth:$appAuthVersion")
 
-    val googleTasksVersion = "v1-rev71-1.25.0"
-    implementation("com.google.apis:google-api-services-tasks:$googleTasksVersion") {
-        exclude(group = "com.google.guava", module = "guava")
-    }
+    implementation("com.jakewharton.timber:timber:5.0.1")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
