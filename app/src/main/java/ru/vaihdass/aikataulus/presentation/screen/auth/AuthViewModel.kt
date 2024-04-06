@@ -15,14 +15,12 @@ import net.openid.appauth.AuthorizationException
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.TokenRequest
 import ru.vaihdass.aikataulus.R
-import ru.vaihdass.aikataulus.data.auth.AuthRepository
+import ru.vaihdass.aikataulus.domain.usecase.AuthUseCase
 import ru.vaihdass.aikataulus.presentation.base.BaseViewModel
-import timber.log.Timber
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
-    private val authService: AuthorizationService
+    private val authUseCase: AuthUseCase, private val authService: AuthorizationService
 ) : BaseViewModel() {
 
     private val _openAuthPageEventChannel = Channel<Intent>(Channel.BUFFERED)
@@ -39,32 +37,49 @@ class AuthViewModel @Inject constructor(
     val authSuccessFlow: Flow<Unit>
         get() = _authSuccessEventChannel.receiveAsFlow()
 
+    fun isAuthorized() = authUseCase.invoke()
+
+    fun choseCalendars() = authUseCase.choseCalendars()
+
     fun onAuthCodeFailed(exception: AuthorizationException) {
         _toastEventChannel.trySendBlocking(R.string.auth_cancelled)
     }
 
     fun onAuthCodeReceived(tokenRequest: TokenRequest) {
-        // TODO: LOG
-        Timber.tag("oauth123").d("3. Received code = ${tokenRequest.authorizationCode}")
-
         viewModelScope.launch {
             _loadingFlow.value = true
             runCatching {
-                // TODO: LOG
-                Timber.tag("oauth123").d("4. Change code to token. Url = ${tokenRequest.configuration.tokenEndpoint}, verifier = ${tokenRequest.codeVerifier}")
-                authRepository.performTokenRequest(
-                    authService = authService,
-                    tokenRequest = tokenRequest
+                authUseCase.performTokenRequest(
+                    authService = authService, tokenRequest = tokenRequest
                 )
             }.onSuccess {
                 _loadingFlow.value = false
                 _authSuccessEventChannel.send(Unit)
             }.onFailure {
-                // TODO: LOG
-                Timber.tag("oauth123").d("auth failed: $it")
-
                 _loadingFlow.value = false
                 _toastEventChannel.send(R.string.auth_cancelled)
+            }
+        }
+        viewModelScope.launch {
+            _loadingFlow.value = true
+            try {
+                val tokenResponse = authUseCase.performTokenRequest(
+                    authService = authService,
+                    tokenRequest = tokenRequest
+                )
+
+                try {
+                    val taskListCreated = authUseCase.setOrCreateAikataulusTaskList()
+
+                    if (taskListCreated) _authSuccessEventChannel.send(Unit)
+                    else _toastEventChannel.send(R.string.auth_failed_tasklist)
+                } catch (e: Exception) {
+                    _toastEventChannel.send(R.string.auth_failed_tasklist)
+                }
+            } catch (e: Exception) {
+                _toastEventChannel.send(R.string.auth_cancelled)
+            } finally {
+                _loadingFlow.value = false
             }
         }
     }
@@ -72,20 +87,14 @@ class AuthViewModel @Inject constructor(
     fun openLoginPage() {
         val customTabsIntent = CustomTabsIntent.Builder().build()
 
-        val authRequest = authRepository.getAuthRequest()
-
-        // TODO: LOG
-        Timber.tag("oauth123").d("1. Generated verifier=${authRequest.codeVerifier},challenge=${authRequest.codeVerifierChallenge}")
+        val authRequest = authUseCase.getAuthRequest()
 
         val openAuthPageIntent = authService.getAuthorizationRequestIntent(
-            authRequest,
-            customTabsIntent
+            authRequest, customTabsIntent
         )
 
         _openAuthPageEventChannel.trySendBlocking(openAuthPageIntent)
 
-        // TODO: LOG
-        Timber.tag("oauth123").d("2. Open auth page: ${authRequest.toUri()}")
     }
 
     override fun onCleared() {

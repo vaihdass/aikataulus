@@ -63,4 +63,15 @@ class CalendarMapper @Inject constructor() {
     fun fromDbEntities(calendars: List<CalendarEntity>): List<CalendarDomainModel> {
         return calendars.map { calendar -> map(calendar) }
     }
+
+    fun mapDomainToDbEntities(calendars: List<CalendarDomainModel>): List<CalendarEntity> {
+        return calendars.map { calendar ->
+            CalendarEntity(
+                id = calendar.id,
+                url = calendar.url,
+                name = calendar.name,
+                courseId = calendar.courseId,
+            )
+        }
+    }
 }

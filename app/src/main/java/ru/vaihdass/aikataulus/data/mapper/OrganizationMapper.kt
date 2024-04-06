@@ -44,4 +44,9 @@ class OrganizationMapper @Inject constructor() {
             it.map { organization -> mapToDbEntityNotNull(organization) }
         }
     }
+
+    fun mapToDbEntity(organization: OrganizationDomainModel) = OrganizationEntity(
+        id = organization.id,
+        name = organization.name,
+    )
 }

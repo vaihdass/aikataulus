@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AikataulusButton">
+        <item name="android:textColor">@color/aikataulus_button_text_color</item>
+        <item name="backgroundTint">@color/aikataulus_button_background_color</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:paddingVertical">16dp</item>
+        <item name="android:paddingHorizontal">20dp</item>
+        <item name="android:letterSpacing">0.09</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:fontFamily">@font/roboto_slab_300</item>
+        <item name="strokeColor">@color/aikataulus_button_stroke_color</item>
+        <item name="strokeWidth">1.3dp</item>
+    </style>
+</resources>

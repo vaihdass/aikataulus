@@ -13,11 +13,12 @@ import net.openid.appauth.ResponseTypeValues
 import net.openid.appauth.TokenRequest
 import ru.vaihdass.aikataulus.BuildConfig
 import ru.vaihdass.aikataulus.data.auth.model.TokensModel
+import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
-class AppAuth @Inject constructor() {
+class AuthApiImpl @Inject constructor() : AuthApi {
     private val serviceConfiguration = AuthorizationServiceConfiguration(
         Uri.parse(GoogleAuthConfig.AUTH_URI),
         Uri.parse(GoogleAuthConfig.TOKEN_URI),
@@ -25,7 +26,7 @@ class AppAuth @Inject constructor() {
         Uri.parse(GoogleAuthConfig.LOGOUT_URI)
     )
 
-    fun getAuthRequest(): AuthorizationRequest {
+    override fun getAuthRequest(): AuthorizationRequest {
         val redirectUri = GoogleAuthConfig.CALLBACK_URL.toUri()
 
         return AuthorizationRequest.Builder(
@@ -38,13 +39,13 @@ class AppAuth @Inject constructor() {
             .build()
     }
 
-    fun getEndSessionRequest(): EndSessionRequest {
+    override fun getEndSessionRequest(): EndSessionRequest {
         return EndSessionRequest.Builder(serviceConfiguration)
             .setPostLogoutRedirectUri(GoogleAuthConfig.LOGOUT_CALLBACK_URL.toUri())
             .build()
     }
 
-    fun getRefreshTokenRequest(refreshToken: String): TokenRequest {
+    override fun getRefreshTokenRequest(refreshToken: String): TokenRequest {
         return TokenRequest.Builder(
             serviceConfiguration,
             GoogleAuthConfig.CLIENT_ID
@@ -55,7 +56,7 @@ class AppAuth @Inject constructor() {
             .build()
     }
 
-    suspend fun performTokenRequestSuspend(
+    override suspend fun performTokenRequestSuspend(
         authService: AuthorizationService,
         tokenRequest: TokenRequest,
     ): TokensModel {

@@ -24,14 +24,16 @@ class CourseMapper @Inject constructor() {
         )
     }
 
+    fun mapNotNull(course: CourseDomainModel): Course {
+        return Course(
+            id = course.id,
+            name = course.name,
+            organizationId = course.organizationId,
+        )
+    }
+
     fun map(courseDomainModel: CourseDomainModel?): Course? {
-        return courseDomainModel?.let { course ->
-            Course(
-                id = course.id,
-                name = course.name,
-                organizationId = course.organizationId,
-            )
-        }
+        return courseDomainModel?.let { course -> mapNotNull(course) }
     }
 
     fun mapToDbEntityNotNull(course: Course): CourseEntity {
@@ -45,6 +47,16 @@ class CourseMapper @Inject constructor() {
     fun mapToDbEntities(response: List<Course>?): List<CourseEntity>? {
         return response?.let {
             it.map { course -> mapToDbEntityNotNull(course) }
+        }
+    }
+
+    fun mapDomainToDbEntities(courses: List<CourseDomainModel>): List<CourseEntity> {
+        return courses.map { course ->
+            CourseEntity(
+                id = course.id,
+                name = course.name,
+                organizationId = course.organizationId,
+            )
         }
     }
 }

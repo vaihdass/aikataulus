@@ -8,8 +8,10 @@
     <string name="exception_unexpected_server">"Непредвиденная ошибка на стороне сервера "</string>
     <string name="unknown_error">Непредвиденная ошибка</string>
     <string name="auth_cancelled">Аутентификация не выполнена</string>
-    <string name="auth_login">Залогиниться</string>
+    <string name="auth_login">Тык для синхронизации</string>
     <string name="corrupt_access_token">Поврежденный токен доступа</string>
     <string name="auth_logout">Разлогиниться</string>
     <string name="auth_refresh_failed">Ошибка авторизации, вы автоматически разлогинены</string>
+    <string name="tasks_sync_header">Синхронизация задач  с Google Tasks</string>
+    <string name="tasks_sync_description">Сохраним твои домашки  в списке «Aikataulus»  Google Tasks</string>
 </resources>

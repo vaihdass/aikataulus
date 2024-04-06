@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.Lazy
@@ -19,7 +20,6 @@ import ru.vaihdass.aikataulus.presentation.base.BaseFragment
 import ru.vaihdass.aikataulus.presentation.base.appComponent
 import ru.vaihdass.aikataulus.presentation.base.launchAndCollectIn
 import ru.vaihdass.aikataulus.presentation.base.toastLong
-import timber.log.Timber
 import javax.inject.Inject
 
 class AuthFragment : BaseFragment(R.layout.fragment_auth) {
@@ -36,6 +36,11 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (viewModel.isAuthorized()) {
+            viewBinding.fragmentLayoutAuth.isVisible = false
+            navigateAuthorized()
+        }
 
         with(viewBinding) {
             btnLogin.setOnClickListener {
@@ -57,7 +62,7 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
             }
 
             authSuccessFlow.launchAndCollectIn(viewLifecycleOwner) {
-                findNavController().navigate(R.id.action_authFragment_to_greetingFragment)
+                navigateAuthorized()
             }
         }
     }
@@ -69,21 +74,36 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
 
     private fun updateIsLoading(isLoading: Boolean) = with(viewBinding) {
         btnLogin.isVisible = !isLoading
-        // loginProgressBar.isVisible = isLoading
     }
 
     private fun openAuthPage(intent: Intent) {
         getAuthResponse.launch(intent)
     }
 
+    private fun navigateAuthorized() {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.authFragment, true)
+            .build()
+
+        if (viewModel.choseCalendars().not()) {
+            findNavController().navigate(
+                R.id.action_authFragment_to_greetingFragment,
+                null,
+                navOptions
+            )
+        } else findNavController().navigate(
+            R.id.action_authFragment_to_mainFragment,
+            null,
+            navOptions
+        )
+    }
+
     private fun handleAuthResponseIntent(intent: Intent) {
         val exception = AuthorizationException.fromIntent(intent)
 
-        Timber.tag("oauth123").d("exception: %s", exception)
         val tokenExchangeRequest = AuthorizationResponse.fromIntent(intent)
             ?.createTokenExchangeRequest()
 
-        Timber.tag("oauth123").d("token exhange request: %s", tokenExchangeRequest)
         when {
             exception != null -> {
                 viewModel.onAuthCodeFailed(exception)

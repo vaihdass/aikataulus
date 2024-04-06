@@ -14,6 +14,9 @@ interface OrganizationDao {
     @Query("SELECT * FROM organizations LIMIT 1")
     fun getAny(): OrganizationEntity?
 
+    @Query("SELECT EXISTS (SELECT 1 FROM organizations LIMIT 1)")
+    fun hasAny(): Boolean
+
     @Query("SELECT * FROM organizations")
     fun getAll(): List<OrganizationEntity>
 

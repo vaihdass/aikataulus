@@ -1,42 +1,45 @@
-package ru.vaihdass.aikataulus.data.auth
+package ru.vaihdass.aikataulus.data.repository
 
 import net.openid.appauth.AuthorizationRequest
 import net.openid.appauth.AuthorizationService
 import net.openid.appauth.EndSessionRequest
 import net.openid.appauth.TokenRequest
+import ru.vaihdass.aikataulus.data.auth.TokenStorage
+import ru.vaihdass.aikataulus.data.remote.api.AuthApi
+import ru.vaihdass.aikataulus.domain.repository.AuthRepository
 import timber.log.Timber
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val tokenStorage: TokenStorage,
-    private val appAuth: AppAuth,
-) {
-    fun corruptAccessToken() {
+    private val appAuth: AuthApi,
+) : AuthRepository {
+    override fun corruptAccessToken() {
         tokenStorage.accessToken = INCORRECT_ACCESS_TOKEN_VALUE
     }
 
-    fun logout() {
+    override fun logout() {
         tokenStorage.accessToken = null
         tokenStorage.refreshToken = null
         tokenStorage.idToken = null
     }
 
-    fun getAuthRequest(): AuthorizationRequest {
+    override fun getAuthRequest(): AuthorizationRequest {
         return appAuth.getAuthRequest()
     }
 
-    fun getEndSessionRequest(): EndSessionRequest {
+    override fun getEndSessionRequest(): EndSessionRequest {
         return appAuth.getEndSessionRequest()
     }
 
-    suspend fun performTokenRequest(authService: AuthorizationService, tokenRequest: TokenRequest) {
+    override suspend fun performTokenRequest(authService: AuthorizationService, tokenRequest: TokenRequest) {
         val tokens = appAuth.performTokenRequestSuspend(authService, tokenRequest)
 
         tokenStorage.accessToken = tokens.accessToken.trim()
         tokenStorage.refreshToken = tokens.refreshToken.trim()
         tokenStorage.idToken = tokens.idToken.trim()
 
-        // TODO: Log
+
         Timber.tag("Oauth").d("6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
     }
 

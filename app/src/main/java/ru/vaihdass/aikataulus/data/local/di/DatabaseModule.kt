@@ -27,8 +27,12 @@ class DatabaseModule {
     @Provides
     fun provideTaskDao(db: AikataulusDatabase) = db.taskDao
 
-    /*
-    TODO: Provide dao for tasks and events
     @Provides
-    fun provideSomeDao(db: AikataulusDatabase) = db.someDao*/
+    fun provideOrganizationDao(db: AikataulusDatabase) = db.organizationDao
+
+    @Provides
+    fun provideCourseDao(db: AikataulusDatabase) = db.courseDao
+
+    @Provides
+    fun provideCalendarDao(db: AikataulusDatabase) = db.calendarDao
 }

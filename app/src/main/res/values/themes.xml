@@ -1,16 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Theme.Aikataulus" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#6F528A</item>
+        <item name="colorPrimaryVariant">#6F528A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#665A6F</item>
+        <item name="colorSecondaryVariant">#665A6F</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorOnSurface">#606060</item>
+        <item name="colorOnSurfaceVariant">#4A454E</item>
+        <item name="colorSurface">#FFF7FE</item>
+        <item name="colorSurfaceVariant">#E9DFEB</item>
+        <item name="colorOutline">#7C757E</item>
+        <item name="colorOutlineVariant">#CCC4CE</item>
+        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <item name="android:windowBackground">?attr/backgroundColor</item>
+        <item name="backgroundColor">#FFF7FE</item>
+        <item name="colorOnBackground">#606060</item>
     </style>
 </resources>

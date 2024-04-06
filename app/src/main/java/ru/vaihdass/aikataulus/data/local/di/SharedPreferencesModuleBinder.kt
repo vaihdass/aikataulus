@@ -8,5 +8,5 @@ import ru.vaihdass.aikataulus.data.local.pref.SharedPreferencesManager
 @Module
 interface SharedPreferencesModuleBinder {
     @Binds
-    fun bindSharedPreferencesManager_to_SharedPreferencesManagerImpl(prefsManagerImpl: AikataulusSharedPreferencesManager): SharedPreferencesManager
+    fun bindSharedPreferencesManager(prefsManagerImpl: AikataulusSharedPreferencesManager): SharedPreferencesManager
 }

@@ -6,7 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import ru.vaihdass.aikataulus.R
-import ru.vaihdass.aikataulus.data.auth.AppAuth
+import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import ru.vaihdass.aikataulus.data.auth.TokenStorage
 import ru.vaihdass.aikataulus.data.exception.GetAccessTokenFailedException
 import ru.vaihdass.aikataulus.utils.ResManager
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class AuthorizationFailedInterceptor @Inject constructor(
     private val authorizationService: AuthorizationService,
-    private val appAuth: AppAuth,
+    private val appAuth: AuthApi,
     private val tokenStorage: TokenStorage,
     private val resManager: ResManager,
 ) : Interceptor {

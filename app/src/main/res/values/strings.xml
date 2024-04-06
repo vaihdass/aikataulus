@@ -13,4 +13,7 @@
     <string name="corrupt_access_token">Corrupted access token</string>
     <string name="auth_logout">Logout</string>
     <string name="auth_refresh_failed">Authorization error, you are logged out</string>
+    <string name="tasks_sync_header">Sync tasks with the Google Tasks</string>
+    <string name="tasks_sync_description">Let\'s save your homework in the \"Aikataulus\" Google Tasks list</string>
+    <string name="auth_failed_tasklist">Unable to create tasklist for sync with Google Tasks</string>
 </resources>
