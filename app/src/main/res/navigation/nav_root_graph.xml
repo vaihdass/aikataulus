@@ -6,10 +6,14 @@
     app:startDestination="@id/authFragment">
 
     <fragment
-        android:id="@+id/greetingFragment"
-        android:name="ru.vaihdass.aikataulus.presentation.screen.greeting.GreetingFragment"
-        android:label="fragment_greeting"
-        tools:layout="@layout/fragment_greeting" />
+        android:id="@+id/organizationFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.greeting.OrganizationFragment"
+        android:label="fragment_organization"
+        tools:layout="@layout/fragment_organization" >
+        <action
+            android:id="@+id/action_greetingFragment_to_coursesFragment"
+            app:destination="@id/coursesFragment" />
+    </fragment>
     <fragment
         android:id="@+id/authFragment"
         android:name="ru.vaihdass.aikataulus.presentation.screen.auth.AuthFragment"
@@ -17,7 +21,7 @@
         tools:layout="@layout/fragment_auth" >
         <action
             android:id="@+id/action_authFragment_to_greetingFragment"
-            app:destination="@id/greetingFragment" />
+            app:destination="@id/organizationFragment" />
         <action
             android:id="@+id/action_authFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -27,4 +31,20 @@
         android:name="ru.vaihdass.aikataulus.presentation.screen.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/coursesFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesFragment"
+        android:label="fragment_courses"
+        tools:layout="@layout/fragment_courses" >
+        <argument
+            android:name="organizationId"
+            app:argType="integer"
+            android:defaultValue="-1"/>
+        <argument
+            android:name="organizationName"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_coursesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import ru.vaihdass.aikataulus.base.Constants.PREF_GOOGLE_REFRESH_TOKEN_KEY
 import ru.vaihdass.aikataulus.data.local.pref.SharedPreferencesManager
 import ru.vaihdass.aikataulus.data.mapper.TaskListMapper
 import ru.vaihdass.aikataulus.data.remote.api.TasksApi
+import ru.vaihdass.aikataulus.data.remote.pojo.tasks.TaskList
 import ru.vaihdass.aikataulus.domain.model.TaskDomainModel
 import ru.vaihdass.aikataulus.domain.model.TaskListDomainModel
 import ru.vaihdass.aikataulus.domain.repository.TasksRepository
@@ -26,11 +27,17 @@ class TasksRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createTaskList(name: String): TaskListDomainModel {
-        TODO("Not yet implemented")
+        val taskList = tasksApi.insertTaskList(TaskList(name = name))
+
+        taskList?.let {
+            return mapper.mapNotNull(it)
+        }
+
+        throw RuntimeException("Unable to create task list")
     }
 
     override suspend fun deleteTaskList(id: String) {
-        TODO("Not yet implemented")
+        tasksApi.removeTaskList(id)
     }
 
     override suspend fun getTodayTasks(): List<TaskDomainModel> {

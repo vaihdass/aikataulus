@@ -16,11 +16,14 @@ import net.openid.appauth.AuthorizationService
 import net.openid.appauth.TokenRequest
 import ru.vaihdass.aikataulus.R
 import ru.vaihdass.aikataulus.domain.usecase.AuthUseCase
+import ru.vaihdass.aikataulus.domain.usecase.GreetingUseCase
 import ru.vaihdass.aikataulus.presentation.base.BaseViewModel
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase, private val authService: AuthorizationService
+    private val authUseCase: AuthUseCase,
+    private val greetingUseCase: GreetingUseCase,
+    private val authService: AuthorizationService
 ) : BaseViewModel() {
 
     private val _openAuthPageEventChannel = Channel<Intent>(Channel.BUFFERED)
@@ -39,27 +42,13 @@ class AuthViewModel @Inject constructor(
 
     fun isAuthorized() = authUseCase.invoke()
 
-    fun choseCalendars() = authUseCase.choseCalendars()
+    fun choseCalendars() = greetingUseCase.choseCalendars()
 
     fun onAuthCodeFailed(exception: AuthorizationException) {
         _toastEventChannel.trySendBlocking(R.string.auth_cancelled)
     }
 
     fun onAuthCodeReceived(tokenRequest: TokenRequest) {
-        viewModelScope.launch {
-            _loadingFlow.value = true
-            runCatching {
-                authUseCase.performTokenRequest(
-                    authService = authService, tokenRequest = tokenRequest
-                )
-            }.onSuccess {
-                _loadingFlow.value = false
-                _authSuccessEventChannel.send(Unit)
-            }.onFailure {
-                _loadingFlow.value = false
-                _toastEventChannel.send(R.string.auth_cancelled)
-            }
-        }
         viewModelScope.launch {
             _loadingFlow.value = true
             try {

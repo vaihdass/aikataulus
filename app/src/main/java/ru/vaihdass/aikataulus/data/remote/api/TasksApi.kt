@@ -18,13 +18,13 @@ interface TasksApi {
     suspend fun getAllTaskLists(): ListResponseTasksList
 
     @DELETE("tasks/v1/users/@me/lists/{taskList}")
-    suspend fun removeTaskList(@Path("taskList") taskListId: String): EmptyOrError
+    suspend fun removeTaskList(@Path("taskList") taskListId: String)
 
     @POST("tasks/v1/users/@me/lists")
     suspend fun insertTaskList(@Body taskList: TaskList): TaskList?
 
     @POST("tasks/v1/lists/{taskList}/clear")
-    suspend fun removeDoneFromTaskList(@Path("taskList") taskListId: String): EmptyOrError
+    suspend fun removeDoneFromTaskList(@Path("taskList") taskListId: String): EmptyOrError?
 
     @POST("tasks/v1/lists/{taskList}/tasks")
     suspend fun insertTask(

@@ -16,4 +16,10 @@
     <string name="tasks_sync_header">Sync tasks with the Google Tasks</string>
     <string name="tasks_sync_description">Let\'s save your homework in the \"Aikataulus\" Google Tasks list</string>
     <string name="auth_failed_tasklist">Unable to create tasklist for sync with Google Tasks</string>
+    <string name="choose_organization">Where do you studying?</string>
+    <string name="organization">Organization</string>
+    <string name="btn_choose">Choose</string>
+    <string name="choose_courses">Choose study groups</string>
+    <string name="choose_course_nothing">Choose not to choose</string>
+    <string name="btn_courses_complete">Complete</string>
 </resources>

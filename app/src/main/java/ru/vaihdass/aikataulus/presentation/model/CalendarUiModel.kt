@@ -5,4 +5,8 @@ data class CalendarUiModel(
     var url: String,
     var name: String,
     var courseId: Int,
-)
+) {
+    override fun toString(): String {
+        return name.trim()
+    }
+}

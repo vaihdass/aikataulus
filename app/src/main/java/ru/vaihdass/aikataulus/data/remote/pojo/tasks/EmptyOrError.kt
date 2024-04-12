@@ -1,5 +1,5 @@
 package ru.vaihdass.aikataulus.data.remote.pojo.tasks
 
-class EmptyOrError(
-    error: Status?,
+data class EmptyOrError(
+    var error: Status?,
 )

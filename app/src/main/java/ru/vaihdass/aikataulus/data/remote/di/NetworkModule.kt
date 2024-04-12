@@ -1,4 +1,4 @@
-package ru.vaihdass.aikataulus.data.remote
+package ru.vaihdass.aikataulus.data.remote.di
 
 import android.annotation.SuppressLint
 import com.google.gson.GsonBuilder
@@ -28,31 +28,8 @@ import javax.net.ssl.X509TrustManager
 @Module
 class NetworkModule {
     @Provides
-    fun provideOkHttpClient(
-        jsonInterceptor: JsonInterceptor,
-        authorizationFailedInterceptor: AuthorizationFailedInterceptor,
-        authorizationInterceptor: AuthorizationInterceptor,
-    ): OkHttpClient {
-        val clientBuilder = if (BuildConfig.DEBUG) {
-            createUnsafeClient()
-        } else {
-            OkHttpClient.Builder()
-        }
-            .addInterceptor(jsonInterceptor)
-            .addInterceptor(authorizationFailedInterceptor)
-            .addInterceptor(authorizationInterceptor)
-
-        if (BuildConfig.DEBUG) {
-            clientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
-        }
-        return clientBuilder.build()
-    }
-
-    @Provides
     @Singleton
-    fun provideAikataulusApi(okHttpClient: OkHttpClient): AikataulusApi {
+    fun provideAikataulusApi(@AikataulusClient okHttpClient: OkHttpClient): AikataulusApi {
         val gson = GsonBuilder()
             .registerTypeAdapter(Date::class.java, DateDeserializer())
             .create()
@@ -67,7 +44,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTasksApi(okHttpClient: OkHttpClient): TasksApi {
+    fun provideTasksApi(@TasksClient okHttpClient: OkHttpClient): TasksApi {
         val gson = GsonBuilder()
             .registerTypeAdapter(Date::class.java, DateDeserializer())
             .registerTypeAdapter(TaskStatus::class.java, TaskStatusDeserializer())
@@ -79,6 +56,47 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(TasksApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    @AikataulusClient
+    fun provideAikataulusOkHttpClient(
+        jsonInterceptor: JsonInterceptor,
+    ): OkHttpClient {
+        return createClientBuilder()
+            .addInterceptor(jsonInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @TasksClient
+    fun provideTasksOkHttpClient(
+        jsonInterceptor: JsonInterceptor,
+        authorizationFailedInterceptor: AuthorizationFailedInterceptor,
+        authorizationInterceptor: AuthorizationInterceptor,
+    ): OkHttpClient {
+        return createClientBuilder()
+            .addInterceptor(jsonInterceptor)
+            .addInterceptor(authorizationFailedInterceptor)
+            .addInterceptor(authorizationInterceptor)
+            .build()
+    }
+
+    private fun createClientBuilder(): OkHttpClient.Builder {
+        val clientBuilder = if (BuildConfig.DEBUG) {
+            createUnsafeClient()
+        } else {
+            OkHttpClient.Builder()
+        }
+
+        if (BuildConfig.DEBUG) {
+            clientBuilder.addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+        }
+        return clientBuilder
     }
 
     // Only for debug!

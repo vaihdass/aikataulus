@@ -24,8 +24,6 @@ class AuthUseCase @Inject constructor(
 ) {
     operator fun invoke() = tasksRepository.isAuthorized()
 
-    fun choseCalendars() = aikataulusRepository.choseCalendars()
-
     suspend fun performTokenRequest(authService: AuthorizationService, tokenRequest: TokenRequest) {
         withContext(dispatcher) {
             authRepository.performTokenRequest(
@@ -42,14 +40,8 @@ class AuthUseCase @Inject constructor(
         return withContext(dispatcher) {
             val taskLists = tasksRepository.getTaskLists().filter { taskList -> taskList.name == GOOGLE_TASKS_LIST_NAME }
 
-            if (taskLists.isEmpty()) createSyncTaskList()
-            else if (taskLists.size > 1) {
-                taskLists.forEach { taskList ->
-                    tasksRepository.deleteTaskList(taskList.id)
-                }
-
-                createSyncTaskList()
-            } else {
+            if (taskLists.size != 1) createSyncTaskList()
+            else {
                 preferencesManager.putString(PREF_GOOGLE_TASKS_LIST_ID, taskLists[0].id)
             }
 

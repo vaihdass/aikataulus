@@ -14,4 +14,11 @@
     <string name="auth_refresh_failed">Ошибка авторизации, вы автоматически разлогинены</string>
     <string name="tasks_sync_header">Синхронизация задач  с Google Tasks</string>
     <string name="tasks_sync_description">Сохраним твои домашки  в списке «Aikataulus»  Google Tasks</string>
+    <string name="auth_failed_tasklist">Не удается создать список задач для синхронизации с Google Tasks</string>
+    <string name="choose_organization">Где ты учишься?</string>
+    <string name="organization">Заведение</string>
+    <string name="btn_choose">Выбрать</string>
+    <string name="choose_courses">Выбери учебные группы</string>
+    <string name="choose_course_nothing">Выбираю не выбирать</string>
+    <string name="btn_courses_complete">Завершить</string>
 </resources>

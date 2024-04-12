@@ -12,7 +12,7 @@ class AikataulusSharedPreferencesManager @Inject constructor(private val sharedP
     override fun putString(key: String, value: String) {
         sharedPreferences.edit()
             .putString(key, value)
-            .apply()
+            .commit()
     }
 
     override fun getInt(key: String, defaultValue: Int): Int {
@@ -32,7 +32,7 @@ class AikataulusSharedPreferencesManager @Inject constructor(private val sharedP
     override fun putBoolean(key: String, value: Boolean) {
         sharedPreferences.edit()
             .putBoolean(key, value)
-            .apply()
+            .commit()
     }
 
     override fun getLong(key: String, defaultValue: Long): Long {

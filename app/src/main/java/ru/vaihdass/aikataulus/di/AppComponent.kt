@@ -8,7 +8,10 @@ import ru.vaihdass.aikataulus.domain.di.DomainModule
 import ru.vaihdass.aikataulus.presentation.MainActivity
 import ru.vaihdass.aikataulus.presentation.di.PresentationModule
 import ru.vaihdass.aikataulus.presentation.screen.auth.AuthFragment
-import ru.vaihdass.aikataulus.presentation.screen.greeting.GreetingFragment
+import ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesAssistedViewModel
+import ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesFragment
+import ru.vaihdass.aikataulus.presentation.screen.greeting.OrganizationFragment
+import ru.vaihdass.aikataulus.presentation.screen.main.MainFragment
 import javax.inject.Singleton
 
 @Component(
@@ -28,6 +31,9 @@ interface AppComponent {
     }
 
     fun inject(activity: MainActivity)
-    fun inject(fragment: GreetingFragment)
     fun inject(fragment: AuthFragment)
+    fun inject(fragment: OrganizationFragment)
+    fun inject(fragment: CoursesFragment)
+    fun coursesAssistedViewModel(): CoursesAssistedViewModel.Factory
+    fun inject(fragment: MainFragment)
 }

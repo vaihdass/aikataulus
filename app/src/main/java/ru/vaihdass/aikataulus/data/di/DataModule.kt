@@ -4,7 +4,7 @@ import dagger.Module
 import ru.vaihdass.aikataulus.data.auth.AuthModule
 import ru.vaihdass.aikataulus.data.local.di.DatabaseModule
 import ru.vaihdass.aikataulus.data.local.di.SharedPreferencesModule
-import ru.vaihdass.aikataulus.data.remote.NetworkModule
+import ru.vaihdass.aikataulus.data.remote.di.NetworkModule
 
 @Module(
     includes = [

@@ -15,11 +15,7 @@ class GreetingUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val repository: AikataulusRepository,
 ) {
-    suspend fun clearEntities() {
-        return withContext(dispatcher) {
-            repository.clearEntities()
-        }
-    }
+    fun choseCalendars() = repository.choseCalendars()
 
     suspend fun getOrganizations(): List<OrganizationUiModel> {
         return withContext(dispatcher) {
@@ -27,33 +23,43 @@ class GreetingUseCase @Inject constructor(
         }
     }
 
-    suspend fun getCourses(organizationId: Int): List<CourseUiModel> {
+    suspend fun getCalendarsGroupingByCourse(organizationId: Int): List<Pair<CourseUiModel, List<CalendarUiModel>>> {
         return withContext(dispatcher) {
-            repository.getCoursesByOrganizationId(organizationId).toUiModelList()
+            val courses = repository.getCoursesByOrganizationId(organizationId)
+                .toUiModelList()
+            val calendars = repository.getCalendarsByOrganizationId(organizationId)
+                .toUiModelList()
+                .groupBy { it.courseId }
+
+            courses.map { course ->
+                course to (calendars[course.id] ?: emptyList())
+            }
         }
     }
 
-    suspend fun getCalendars(organizationId: Int): List<CalendarUiModel> {
-        return withContext(dispatcher) {
-            repository.getCalendarsByOrganizationId(organizationId).toUiModelList()
+    suspend fun saveAikataulusSettings(
+        organization: OrganizationUiModel,
+        courses: List<CourseUiModel>,
+        calendars: List<CalendarUiModel>,
+    ) {
+        withContext(dispatcher) {
+            repository.clearEntities()
+            saveOrganization(organization)
+            saveCourses(courses)
+            saveCalendars(calendars)
+            repository.setChoseCalendars(true)
         }
     }
 
-    suspend fun saveOrganization(organization: OrganizationUiModel) {
-        return withContext(dispatcher) {
-            repository.saveOrganization(organization.toDomainModel())
-        }
+    private suspend fun saveOrganization(organization: OrganizationUiModel) {
+        repository.saveOrganization(organization.toDomainModel())
     }
 
-    suspend fun saveCourses(courses: List<CourseUiModel>) {
-        return withContext(dispatcher) {
-            repository.saveCourses(courses.toDomainModelList())
-        }
+    private suspend fun saveCourses(courses: List<CourseUiModel>) {
+        repository.saveCourses(courses.toDomainModelList())
     }
 
-    suspend fun saveCalendars(calendars: List<CalendarUiModel>) {
-        return withContext(dispatcher) {
-            repository.saveCalendars(calendars.toDomainModelList())
-        }
+    private suspend fun saveCalendars(calendars: List<CalendarUiModel>) {
+        repository.saveCalendars(calendars.toDomainModelList())
     }
 }
