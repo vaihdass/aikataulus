@@ -1,5 +1,6 @@
 package ru.vaihdass.aikataulus.presentation.screen.auth
 
+import android.content.Context
 import android.content.Intent
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.viewModelScope
@@ -21,11 +22,11 @@ import ru.vaihdass.aikataulus.presentation.base.BaseViewModel
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
+    private val ctx: Context,
     private val authUseCase: AuthUseCase,
     private val greetingUseCase: GreetingUseCase,
-    private val authService: AuthorizationService
 ) : BaseViewModel() {
-
+    private val authService: AuthorizationService = AuthorizationService(ctx)
     private val _openAuthPageEventChannel = Channel<Intent>(Channel.BUFFERED)
     private val _toastEventChannel = Channel<Int>(Channel.BUFFERED)
     private val _authSuccessEventChannel = Channel<Unit>(Channel.BUFFERED)
@@ -83,7 +84,6 @@ class AuthViewModel @Inject constructor(
         )
 
         _openAuthPageEventChannel.trySendBlocking(openAuthPageIntent)
-
     }
 
     override fun onCleared() {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aikataulus</string>
+    <string name="app_name" translatable="false">Aikataulus</string>
 
     <!-- Exceptions -->
     <string name="exception_too_many_requests">Exceeded the number of request attempts</string>
@@ -22,4 +22,44 @@
     <string name="choose_courses">Choose study groups</string>
     <string name="choose_course_nothing">Choose not to choose</string>
     <string name="btn_courses_complete">Complete</string>
+    <string name="btn_schedule">Schedule</string>
+    <string name="btn_tasks">Tasks</string>
+    <string name="settings_header">Settings</string>
+    <string name="btn_export_schedule">Export schedule</string>
+    <string name="btn_change_courses">Change courses</string>
+    <string name="unavailable_to_share_link">No apps available to share the link</string>
+    <string name="share_schedule_header">Share link using</string>
+    <string name="unable_to_create_task_list">Unable to create task list</string>
+    <string name="unable_to_edit_task">Unable to edit task on the server,</string>
+    <string name="unable_to_get_all_tasks">Unable to get all tasks from the server</string>
+    <string name="unable_to_get_tasks_for_today">Unable to get tasks for today</string>
+    <string name="unable_to_get_all_events">Unable to get all events from the server</string>
+    <string name="unable_to_get_today_tasks">Unable to get today tasks from the server</string>
+    <string name="unable_to_peek_events">Unable to peek events from the server</string>
+    <string name="fab_create_task">Task</string>
+    <string name="today">Today</string>
+    <string name="edit_task">Edit the task</string>
+    <string name="unable_to_get_task">Unable to get task from the server</string>
+    <string name="without_a_deadline">Without a deadline</string>
+    <string name="time_today">Today</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_tomorrow">Tomorrow</string>
+    <string name="unable_to_get_events_for_today">Unable to get events for today</string>
+    <string name="event_type">"Type: "</string>
+    <string name="event_teacher">"Teacher: "</string>
+    <string name="unable_to_modify_task">Unable to modify task now, please try again...</string>
+    <string name="unable_get_this_task">Unable to get this task, please try again...</string>
+    <string name="btn_save">Save</string>
+    <string name="subject">Subject</string>
+    <string name="task_description">Task description</string>
+    <string name="deadlline">Deadline</string>
+    <string name="deadline_not_chosen">Not chosen</string>
+    <string name="choose_deadline_date_title">Choose a day of the deadline</string>
+    <string name="unable_create_new_task">Unable to create new task, please try again</string>
+    <string name="create_a_task">Create a task</string>
+    <string name="btn_create_task">Create</string>
+    <string name="unable_to_remove_done_tasks">Unable to remove done tasks from the server, please try again later</string>
+    <string name="tasks_title">Tasks</string>
+    <string name="btn_remove_done_tasks">Remove done</string>
+    <string name="unable_to_delete_task">Unable to delete task, please try again...</string>
 </resources>

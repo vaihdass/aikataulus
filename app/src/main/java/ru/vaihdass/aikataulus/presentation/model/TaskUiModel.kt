@@ -1,5 +1,6 @@
 package ru.vaihdass.aikataulus.presentation.model
 
+import java.io.Serializable
 import java.util.Date
 
 data class TaskUiModel (
@@ -8,7 +9,7 @@ data class TaskUiModel (
     var task: String,
     var deadline: Date? = null,
     var isDone: Boolean = false,
-) {
+) : Serializable {
     override fun toString(): String {
         val deadlineSubstring = if (deadline != null) "(due to ${deadline.toString()}) " else ""
         return "${if (isDone) "Done" else "Not completed"} ${subject.trim()} $deadlineSubstring— $task"

@@ -44,6 +44,14 @@ class AikataulusRepositoryImpl @Inject constructor(
             ?: throw RuntimeException()
     }
 
+    override suspend fun getAllSavedCalendars(): List<CalendarDomainModel> {
+        return calendarMapper.fromDbEntities(calendarDao.getAll())
+    }
+
+    override suspend fun getAllSavedCalendarIds(): List<Int> {
+        return calendarDao.getAllId()
+    }
+
     override suspend fun saveOrganization(organization: OrganizationDomainModel) {
         organizationDao.insert(organizationMapper.mapToDbEntity(organization))
     }

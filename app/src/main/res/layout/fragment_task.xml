@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/srl_task"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screen.task.TaskFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/fragment_layout_task"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_remove_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:layout_constraintBottom_toTopOf="@id/fab_edit_task"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorTasksPrimary"
+        android:src="@drawable/trash"
+        app:fabCustomSize="64dp"
+        app:maxImageSize="28dp"
+        app:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_edit_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:layout_constraintBottom_toTopOf="@id/fab_done_task"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorTasksPrimary"
+        android:src="@drawable/edit"
+        app:fabCustomSize="64dp"
+        app:maxImageSize="28dp"
+        app:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_done_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="26dp"
+        android:backgroundTint="@color/colorTasksPrimary"
+        android:src="@drawable/done"
+        app:fabCustomSize="64dp"
+        app:maxImageSize="28dp"
+        app:tint="@color/white"/>
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsv_task"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".presentation.screen.task.TaskFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="24dp"
+        android:textSize="28sp"
+        android:letterSpacing="0.02"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_mono_regular"
+        android:textColor="?attr/colorPrimary"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text=""
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_task_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subject"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:background="@drawable/task_background_shape">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/white"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:letterSpacing="0.02"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_task_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_task_date"
+        android:background="@drawable/task_background_shape">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="16dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:text="" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

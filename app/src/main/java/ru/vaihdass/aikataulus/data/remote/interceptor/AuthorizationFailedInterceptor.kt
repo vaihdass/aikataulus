@@ -5,10 +5,11 @@ import net.openid.appauth.AuthorizationService
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import ru.vaihdass.aikataulus.R
-import ru.vaihdass.aikataulus.data.remote.api.AuthApi
+import ru.vaihdass.aikataulus.base.Constants.PREF_GOOGLE_TASKS_LIST_ID
+import ru.vaihdass.aikataulus.base.Constants.PREF_IS_CALENDARS_SELECTED
 import ru.vaihdass.aikataulus.data.auth.TokenStorage
-import ru.vaihdass.aikataulus.data.exception.GetAccessTokenFailedException
+import ru.vaihdass.aikataulus.data.local.pref.AikataulusSharedPreferencesManager
+import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import ru.vaihdass.aikataulus.utils.ResManager
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -18,6 +19,7 @@ class AuthorizationFailedInterceptor @Inject constructor(
     private val authorizationService: AuthorizationService,
     private val appAuth: AuthApi,
     private val tokenStorage: TokenStorage,
+    private val preferencesManager: AikataulusSharedPreferencesManager,
     private val resManager: ResManager,
 ) : Interceptor {
 
@@ -95,7 +97,11 @@ class AuthorizationFailedInterceptor @Inject constructor(
         if (tokenRefreshed) {
             tokenUpdateTime = System.currentTimeMillis()
         } else {
-            throw GetAccessTokenFailedException(resManager.getString(R.string.auth_refresh_failed))
+            tokenStorage.accessToken = null
+            tokenStorage.refreshToken = null
+            tokenStorage.idToken = null
+            preferencesManager.putString(PREF_GOOGLE_TASKS_LIST_ID, "")
+            preferencesManager.putBoolean(PREF_IS_CALENDARS_SELECTED, false)
         }
         getLatch()?.countDown()
         return tokenRefreshed

@@ -52,12 +52,12 @@ class CoursesAssistedViewModel @AssistedInject constructor(
     val errorFlow
         get() = _errorFlow.asSharedFlow()
 
+    val saveCalendarsSuccessFlow
+        get() = _saveCalendarsSuccessEventChannel.receiveAsFlow()
+
     val coursesAdapter
         get() = _coursesAdapter
             ?: throw IllegalStateException("Courses adapter should be initialized")
-
-    val saveCalendarsSuccessFlow
-        get() = _saveCalendarsSuccessEventChannel.receiveAsFlow()
 
     fun initAdapter(onCalendarClicked: (CourseUiModel, CalendarUiModel) -> Unit) {
         if (_coursesAdapter != null) return
@@ -68,6 +68,8 @@ class CoursesAssistedViewModel @AssistedInject constructor(
     init {
         fetchCalendars()
     }
+
+    fun choseCalendars() = greetingUseCase.choseCalendars()
 
     fun fetchCalendars() {
         viewModelScope.launch {

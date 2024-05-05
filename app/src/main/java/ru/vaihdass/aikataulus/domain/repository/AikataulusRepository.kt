@@ -9,6 +9,9 @@ interface AikataulusRepository {
     suspend fun getCoursesByOrganizationId(organizationId: Int): List<CourseDomainModel>
     suspend fun getCalendarsByOrganizationId(organizationId: Int): List<CalendarDomainModel>
 
+    suspend fun getAllSavedCalendars(): List<CalendarDomainModel>
+    suspend fun getAllSavedCalendarIds(): List<Int>
+
     suspend fun saveOrganization(organization: OrganizationDomainModel)
     suspend fun saveCourses(courses: List<CourseDomainModel>)
     suspend fun saveCalendars(calendars: List<CalendarDomainModel>)

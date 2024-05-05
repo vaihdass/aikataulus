@@ -16,5 +16,7 @@
         <item name="android:windowBackground">?attr/backgroundColor</item>
         <item name="backgroundColor">#FFF7FE</item>
         <item name="colorOnBackground">#606060</item>
+        <item name="colorPrimaryContainer">#F0DBFF</item>
+        <item name="colorOnPrimaryContainer">#280D42</item>
     </style>
 </resources>

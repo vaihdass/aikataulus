@@ -15,7 +15,9 @@ import ru.vaihdass.aikataulus.data.remote.interceptor.AuthorizationFailedInterce
 import ru.vaihdass.aikataulus.data.remote.interceptor.AuthorizationInterceptor
 import ru.vaihdass.aikataulus.data.remote.interceptor.JsonInterceptor
 import ru.vaihdass.aikataulus.data.remote.serializer.DateDeserializer
+import ru.vaihdass.aikataulus.data.remote.serializer.DateSerializer
 import ru.vaihdass.aikataulus.data.remote.serializer.TaskStatusDeserializer
+import ru.vaihdass.aikataulus.data.remote.serializer.TaskStatusSerializer
 import ru.vaihdass.aikataulus.data.remote.util.TaskStatus
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -47,7 +49,9 @@ class NetworkModule {
     fun provideTasksApi(@TasksClient okHttpClient: OkHttpClient): TasksApi {
         val gson = GsonBuilder()
             .registerTypeAdapter(Date::class.java, DateDeserializer())
+            .registerTypeAdapter(Date::class.java, DateSerializer())
             .registerTypeAdapter(TaskStatus::class.java, TaskStatusDeserializer())
+            .registerTypeAdapter(TaskStatus::class.java, TaskStatusSerializer())
             .create()
 
         return Retrofit.Builder()

@@ -7,8 +7,7 @@ import ru.vaihdass.aikataulus.domain.repository.TasksRepository
 import ru.vaihdass.aikataulus.presentation.model.TaskUiModel
 import javax.inject.Inject
 
-class GetTasksUseCase @Inject
-constructor(
+class GetTasksUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val repository: TasksRepository,
 ) {
@@ -25,9 +24,9 @@ constructor(
         }
     }
 
-    suspend fun getTasksGroupBySubject(): List<TaskUiModel> {
+    suspend fun getTasksGroupBySubject(): Map<String, List<TaskUiModel>> {
         return withContext(dispatcher) {
-            repository.getTasksGroupBySubject().toUiModelList()
+            repository.getTasksGroupBySubject().mapValues { entry -> entry.value.toUiModelList() }
         }
     }
 }

@@ -1,5 +1,6 @@
 package ru.vaihdass.aikataulus.presentation.model
 
+import java.io.Serializable
 import java.util.Date
 
 data class EventUiModel(
@@ -11,4 +12,4 @@ data class EventUiModel(
     val calendarName: String,
     val dateFrom: Date,
     val dateTo: Date,
-)
+) : Serializable

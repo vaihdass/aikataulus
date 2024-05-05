@@ -8,9 +8,11 @@ import javax.inject.Inject
 
 class EventMapper @Inject constructor() {
     fun map(response: List<Event>?): List<EventDomainModel>? {
-        return response?.let {
-            it.map { event -> mapNotNull(event) }
-        }
+        return response?.let { mapNotNull(it) }
+    }
+
+    fun mapNotNull(response: List<Event>): List<EventDomainModel> {
+        return response.map { event -> mapNotNull(event) }
     }
 
     fun map(input: Event?): EventDomainModel? {

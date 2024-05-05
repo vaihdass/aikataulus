@@ -8,7 +8,6 @@ import ru.vaihdass.aikataulus.R
 import ru.vaihdass.aikataulus.base.Constants.GOOGLE_TASKS_LIST_NAME
 import ru.vaihdass.aikataulus.base.Constants.PREF_GOOGLE_TASKS_LIST_ID
 import ru.vaihdass.aikataulus.data.local.pref.SharedPreferencesManager
-import ru.vaihdass.aikataulus.domain.repository.AikataulusRepository
 import ru.vaihdass.aikataulus.domain.repository.AuthRepository
 import ru.vaihdass.aikataulus.domain.repository.TasksRepository
 import ru.vaihdass.aikataulus.utils.ResManager
@@ -17,7 +16,6 @@ import javax.inject.Inject
 class AuthUseCase @Inject constructor(
     private val dispatcher: CoroutineDispatcher,
     private val authRepository: AuthRepository,
-    private val aikataulusRepository: AikataulusRepository,
     private val tasksRepository: TasksRepository,
     private val preferencesManager: SharedPreferencesManager,
     private val resManager: ResManager,

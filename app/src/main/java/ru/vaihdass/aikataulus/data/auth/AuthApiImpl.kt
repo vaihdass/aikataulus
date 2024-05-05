@@ -14,7 +14,6 @@ import net.openid.appauth.TokenRequest
 import ru.vaihdass.aikataulus.BuildConfig
 import ru.vaihdass.aikataulus.data.auth.model.TokensModel
 import ru.vaihdass.aikataulus.data.remote.api.AuthApi
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
@@ -73,8 +72,6 @@ class AuthApiImpl @Inject constructor() : AuthApi {
                     }
 
                     e != null -> {
-                        // TODO: Log
-                        Timber.tag("oauth123").d("exception when token request: %s", e)
                         continuation.resumeWith(Result.failure(e))
                     }
                     else -> error("Unreachable")

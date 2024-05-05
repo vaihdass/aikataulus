@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsv_task_create"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".presentation.screen.taskcreate.TaskCreateFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_layout_task_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_app_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="24dp"
+            android:textSize="32sp"
+            android:text="@string/app_name"
+            android:letterSpacing="0.05"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:textColor="?attr/colorPrimary"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_title"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="32dp"
+            android:textSize="28sp"
+            android:text="@string/create_a_task"
+            android:letterSpacing="0.11"
+            android:fontFamily="@font/roboto_300"
+            android:textColor="?attr/colorSecondary"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_subject"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="72dp"
+            android:hint="@string/subject"
+            app:boxBackgroundMode="outline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_header">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_subject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:inputType="text"
+                android:minHeight="64dp"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_task"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/task_description"
+            app:boxBackgroundMode="outline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_subject">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_task"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:inputType="textMultiLine"
+                android:minHeight="72dp"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_deadline_chooser"
+            style="@style/AikataulusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+
+            android:layout_marginTop="32dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="16dp"
+            android:text="@string/deadlline"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_task" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/btn_deadline_chooser"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_task"
+            app:layout_constraintBottom_toBottomOf="@id/btn_deadline_chooser"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="24dp"
+            android:textSize="18sp"
+            android:text="@string/deadline_not_chosen"
+            android:letterSpacing="0.13"
+            android:fontFamily="@font/roboto_500"
+            android:textColor="?attr/colorOnBackground"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create"
+            style="@style/AikataulusButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="12dp"
+            android:text="@string/btn_create_task"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_deadline_chooser"
+            app:layout_constraintVertical_bias="1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

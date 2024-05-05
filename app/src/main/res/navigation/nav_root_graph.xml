@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_organization" >
         <action
             android:id="@+id/action_greetingFragment_to_coursesFragment"
-            app:destination="@id/coursesFragment" />
+            app:destination="@id/coursesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/authFragment"
@@ -21,16 +25,57 @@
         tools:layout="@layout/fragment_auth" >
         <action
             android:id="@+id/action_authFragment_to_greetingFragment"
-            app:destination="@id/organizationFragment" />
+            app:destination="@id/organizationFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_authFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="ru.vaihdass.aikataulus.presentation.screen.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:exitAnim="@anim/nav_default_pop_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_eventFragment"
+            app:destination="@id/eventFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_taskCreateFragment"
+            app:destination="@id/taskCreateFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_tasksFragment"
+            app:destination="@id/tasksFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/coursesFragment"
         android:name="ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesFragment"
@@ -45,6 +90,81 @@
             app:argType="string"/>
         <action
             android:id="@+id/action_coursesFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_organizationFragment"
+            app:destination="@id/organizationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.event.EventFragment"
+        android:label="EventFragment"
+        tools:layout="@layout/fragment_event">
+        <argument
+            android:name="event"
+            app:argType="ru.vaihdass.aikataulus.presentation.model.EventUiModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.task.TaskFragment"
+        android:label="TaskFragment"
+        tools:layout="@layout/fragment_task">
+        <argument
+            android:name="task"
+            app:argType="ru.vaihdass.aikataulus.presentation.model.TaskUiModel" />
+        <action
+            android:id="@+id/action_taskFragment_to_taskEditFragment"
+            app:destination="@id/taskEditFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskEditFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.taskedit.TaskEditFragment"
+        android:label="TaskEditFragment"
+        tools:layout="@layout/fragment_task_edit">
+        <argument
+            android:name="task"
+            app:argType="ru.vaihdass.aikataulus.presentation.model.TaskUiModel" />
+        <action
+            android:id="@+id/action_taskEditFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreateFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.taskcreate.TaskCreateFragment"
+        android:label="fragment_task_create"
+        tools:layout="@layout/fragment_task_create" />
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:name="ru.vaihdass.aikataulus.presentation.screen.tasks.TasksFragment"
+        android:label="fragment_tasks"
+        tools:layout="@layout/fragment_tasks" >
+        <action
+            android:id="@+id/action_tasksFragment_to_taskFragment"
+            app:destination="@id/taskFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

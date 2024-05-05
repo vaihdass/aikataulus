@@ -13,4 +13,9 @@ object Constants {
     const val PREF_GOOGLE_ID_TOKEN_KEY = "PREF_GOOGLE_ID_TOKEN_KEY"
 
     const val PREF_GOOGLE_TASKS_LIST_ID = "PREF_GOOGLE_TASKS_LIST_ID"
+
+    const val GOOGLE_TASKS_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    const val AIKATAULUS_UI_EVENT_TIME_PATTERN = "HH:mm"
+    const val UI_TIME_PATTERN = "HH:mm"
+    const val UI_DAY_PATTERN = "d MMM"
 }

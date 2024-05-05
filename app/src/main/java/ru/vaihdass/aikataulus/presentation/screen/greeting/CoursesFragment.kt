@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 class CoursesFragment : BaseFragment(R.layout.fragment_courses) {
     private val viewBinding by viewBinding(FragmentCoursesBinding::bind)
-
     private val args: CoursesFragmentArgs by navArgs()
 
     @Inject
@@ -29,6 +28,8 @@ class CoursesFragment : BaseFragment(R.layout.fragment_courses) {
             organization = OrganizationUiModel(args.organizationId, args.organizationName)
         )
     }
+
+    private var choseCalendars: Boolean = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +45,8 @@ class CoursesFragment : BaseFragment(R.layout.fragment_courses) {
             }
 
             if (isCalendarsSelected()) clearCalendarsSelected()
+
+            choseCalendars = viewModel.choseCalendars()
         }
 
         with(viewBinding) {
@@ -77,11 +80,15 @@ class CoursesFragment : BaseFragment(R.layout.fragment_courses) {
             }
 
             saveCalendarsSuccessFlow.observe {
-                val navOptions = NavOptions.Builder()
-                    .setPopUpTo(R.id.organizationFragment, true)
-                    .build()
+                val navController = findNavController()
 
-                findNavController().navigate(
+                val fragmentId = if (choseCalendars) R.id.mainFragment else R.id.organizationFragment
+
+                val navOptions = NavOptions.Builder()
+                        .setPopUpTo(fragmentId, true)
+                        .build()
+
+                navController.navigate(
                     R.id.action_coursesFragment_to_mainFragment,
                     null,
                     navOptions

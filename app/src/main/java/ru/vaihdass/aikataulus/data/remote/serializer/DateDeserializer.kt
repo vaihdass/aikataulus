@@ -1,9 +1,9 @@
 package ru.vaihdass.aikataulus.data.remote.serializer
 
-import android.util.Log
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
+import timber.log.Timber
 import java.lang.reflect.Type
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -34,7 +34,8 @@ class DateDeserializer : JsonDeserializer<Date> {
                 dateFormat.timeZone = TimeZone.getTimeZone("UTC")
                 return dateFormat.parse(dateString)
             } catch (e: ParseException) {
-                Log.e("AikataulusDateSerializer", "Exception due parsing date: $dateString", e)
+                Timber.tag("AikataulusDateSerializer")
+                    .e(e, "Exception due parsing date: $dateString")
                 return null
             }
         }

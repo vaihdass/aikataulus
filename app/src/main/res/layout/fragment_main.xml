@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    android:id="@+id/nsv_main"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/srl_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.screen.main.MainFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_create_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="?attr/colorPrimaryContainer"
+        android:text="@string/fab_create_task"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_500"
+        android:textSize="15sp"
+        android:textColor="?attr/colorOnPrimaryContainer"
+        app:icon="@drawable/plus"
+        app:iconSize="22dp"
+        app:iconTint="?attr/colorOnPrimaryContainer"
+        app:iconPadding="10dp"
+        android:paddingVertical="16dp"
+        android:paddingStart="18dp"
+        android:paddingEnd="22dp"/>
+
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsv_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".presentation.screen.main.MainFragment">
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/fragment_layout_main"
     android:layout_width="match_parent"
@@ -17,15 +52,135 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_main_header"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HELLO!"
-        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_app_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_btn_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:textSize="32sp"
+            android:text="@string/app_name"
+            android:letterSpacing="0.05"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:textColor="?attr/colorPrimary"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_btn_settings"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:layout_constraintStart_toEndOf="@id/tv_app_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_app_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_app_title"
+            android:tint="?attr/colorPrimary"
+            android:src="@drawable/settings"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_tasks"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_title"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:layout_marginTop="20dp"
+            android:text="@string/btn_schedule"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_500"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:textColor="?attr/backgroundColor"
+            app:backgroundTint="@color/colorSchedulePrimary"
+            app:icon="@drawable/schedule"
+            app:iconTint="?attr/backgroundColor"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:cornerRadius="50dp"
+            android:paddingHorizontal="18dp"
+            android:paddingEnd="22dp"
+            android:paddingVertical="14dp"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_tasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/btn_schedule"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_app_title"
+            android:layout_marginTop="20dp"
+            android:text="@string/btn_tasks"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/roboto_500"
+            android:layout_gravity="center"
+            android:textColor="?attr/backgroundColor"
+            app:backgroundTint="@color/colorTasksPrimary"
+            app:icon="@drawable/task"
+            app:iconTint="?attr/backgroundColor"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:cornerRadius="50dp"
+            android:paddingHorizontal="18dp"
+            android:paddingEnd="22dp"
+            android:paddingVertical="14dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_day_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_main_header"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:text="6 марта, ср"
+        android:letterSpacing="0.05"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="?attr/colorSecondary"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_day_title"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_events"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="6dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

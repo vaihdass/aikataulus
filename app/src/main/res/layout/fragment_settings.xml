@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsv_settings"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".presentation.screen.settings.SettingsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/fragment_layout_settings"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_app_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="24dp"
+        android:textSize="32sp"
+        android:text="@string/app_name"
+        android:letterSpacing="0.05"
+        android:fontFamily="@font/roboto_mono_regular"
+        android:textColor="?attr/colorPrimary"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_title"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="32dp"
+        android:textSize="28sp"
+        android:text="@string/settings_header"
+        android:letterSpacing="0.11"
+        android:fontFamily="@font/roboto_300"
+        android:textColor="?attr/colorSecondary"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_share_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header"
+
+        style="@style/AikataulusButton"
+        android:fontFamily="@font/roboto_slab_regular"
+        android:letterSpacing="0.05"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="48dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="20dp"
+        android:textSize="20sp"
+        android:textAlignment="textStart"
+        android:text="@string/btn_export_schedule"
+        app:icon="@drawable/share"
+        app:iconTint="@color/aikataulus_button_text_color"
+        app:iconSize="30dp"
+        app:iconGravity="end"
+        app:iconPadding="16dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_change_courses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_share_schedule"
+
+        style="@style/AikataulusButton"
+        android:fontFamily="@font/roboto_slab_regular"
+        android:letterSpacing="0.05"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="32dp"
+        android:paddingVertical="18dp"
+        android:paddingHorizontal="20dp"
+        android:textSize="20sp"
+        android:textAlignment="textStart"
+        android:text="@string/btn_change_courses"
+        app:icon="@drawable/schedule"
+        app:iconTint="@color/aikataulus_button_text_color"
+        app:iconSize="30dp"
+        app:iconGravity="end"
+        app:iconPadding="16dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_change_courses"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1"
+
+        style="@style/AikataulusButton"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="12dp"
+        android:textSize="24sp"
+        android:text="@string/auth_logout"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

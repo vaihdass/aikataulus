@@ -8,10 +8,12 @@ interface TasksRepository {
     suspend fun createTaskList(name: String): TaskListDomainModel
     suspend fun deleteTaskList(id: String)
     suspend fun getTodayTasks(): List<TaskDomainModel>
-    suspend fun getTasksGroupBySubject(): List<TaskDomainModel>
+    suspend fun getTasksGroupBySubject(): Map<String, List<TaskDomainModel>>
     suspend fun getAllTasks(): List<TaskDomainModel>
-    suspend fun editTask(task: TaskDomainModel)
+    suspend fun getTask(task: TaskDomainModel): TaskDomainModel
+    suspend fun editTask(task: TaskDomainModel): TaskDomainModel
     suspend fun deleteTask(taskId: String)
-    suspend fun createTask(task: TaskDomainModel)
+    suspend fun removeDoneTasks()
+    suspend fun createTask(task: TaskDomainModel): TaskDomainModel
     fun isAuthorized(): Boolean
 }

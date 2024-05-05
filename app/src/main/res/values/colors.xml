@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorSchedulePrimary">#7986CB</color>
+    <color name="colorScheduleSecondary">#5C648E</color>
+    <color name="colorTasksPrimary">#C03773</color>
+    <color name="colorTasksSecondary">#83204C</color>
+    <color name="colorAppBar">?attr/backgroundColor</color>
+    <color name="colorTasksButton">#C03773</color>
 </resources>

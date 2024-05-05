@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorSchedulePrimary">#8F9EFA</color>
+    <color name="colorTasksPrimary">#CC4580</color>
+    <color name="colorTasksSecondary">#9A315F</color>
+    <color name="colorTasksButton">#616E8C</color>
+</resources>

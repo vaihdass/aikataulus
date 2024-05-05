@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsv_event"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".presentation.screen.event.EventFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/fragment_layout_event"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginVertical="24dp"
+        android:textSize="28sp"
+        android:letterSpacing="0.02"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_mono_regular"
+        android:textColor="?attr/colorPrimary"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text=""
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_event_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_subject"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:background="@drawable/event_background_shape"
+        android:backgroundTint="?attr/colorPrimaryContainer">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:letterSpacing="0.04"
+            android:textSize="19sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_event_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_event_location"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:background="@drawable/event_background_shape"
+        android:backgroundTint="?attr/colorPrimaryContainer">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="10dp"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:letterSpacing="0.01"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_event_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_event_date"
+        android:background="@drawable/event_background_shape"
+        android:backgroundTint="?attr/colorPrimaryContainer">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_event_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginVertical="16dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/roboto_mono_regular"
+            android:letterSpacing="0.03"
+            android:maxLines="6"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:textSize="18sp"
+            android:text=""/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

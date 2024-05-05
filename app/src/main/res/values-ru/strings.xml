@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Aikataulus</string>
     <string name="exception_too_many_requests">Превышено количество попыток запроса</string>
     <string name="exception_not_authorized">"Вы не вошли в систему "</string>
     <string name="exception_bad_request">Неверный запрос</string>
@@ -10,7 +9,7 @@
     <string name="auth_cancelled">Аутентификация не выполнена</string>
     <string name="auth_login">Тык для синхронизации</string>
     <string name="corrupt_access_token">Поврежденный токен доступа</string>
-    <string name="auth_logout">Разлогиниться</string>
+    <string name="auth_logout">Выйти</string>
     <string name="auth_refresh_failed">Ошибка авторизации, вы автоматически разлогинены</string>
     <string name="tasks_sync_header">Синхронизация задач  с Google Tasks</string>
     <string name="tasks_sync_description">Сохраним твои домашки  в списке «Aikataulus»  Google Tasks</string>
@@ -21,4 +20,43 @@
     <string name="choose_courses">Выбери учебные группы</string>
     <string name="choose_course_nothing">Выбираю не выбирать</string>
     <string name="btn_courses_complete">Завершить</string>
+    <string name="btn_schedule">Расписание</string>
+    <string name="btn_tasks">Задания</string>
+    <string name="settings_header">Настройки</string>
+    <string name="btn_export_schedule">Экспорт расписания</string>
+    <string name="btn_change_courses">Изменить курсы</string>
+    <string name="unavailable_to_share_link">Нет приложений для расшаривания ссылки</string>
+    <string name="share_schedule_header">Поделиться ссылкой с помощью</string>
+    <string name="unable_to_create_task_list">Не удалось создать список заданий</string>
+    <string name="unable_to_edit_task">Не удалось изменить задание на сервере, изменится после синхронизации</string>
+    <string name="unable_to_get_all_tasks">Не удалось получить все задания</string>
+    <string name="unable_to_get_tasks_for_today">Не удалось получить задания на сегодня</string>
+    <string name="unable_to_get_all_events">Не удалось получить все мероприятия с сервера</string>
+    <string name="unable_to_get_today_tasks">Не удалось получить все мероприятия на сегодня с сервера</string>
+    <string name="unable_to_peek_events">Не удалось получить мероприятия с сервера</string>
+    <string name="fab_create_task">Задание</string>
+    <string name="today">Сегодня</string>
+    <string name="edit_task">Редактировать задание</string>
+    <string name="unable_to_get_task">Не удалось получить задание с сервера</string>
+    <string name="without_a_deadline">Без дедлайна</string>
+    <string name="time_today">Сегодня</string>
+    <string name="time_yesterday">Вчера</string>
+    <string name="time_tomorrow">Завтра</string>
+    <string name="unable_to_get_events_for_today">Не удалось получить мероприятия на сегодня</string>
+    <string name="event_type">"Тип: "</string>
+    <string name="event_teacher">"Учитель: "</string>
+    <string name="unable_to_modify_task">Не удалось изменить эту задачу</string>
+    <string name="unable_get_this_task">Не удалось получить эту задачу</string>
+    <string name="btn_save">Сохранить</string>
+    <string name="create_a_task">Новое задание</string>
+    <string name="subject">Предмет</string>
+    <string name="task_description">Описание задания</string>
+    <string name="deadlline">Дедлайн</string>
+    <string name="deadline_not_chosen">Не выбран</string>
+    <string name="choose_deadline_date_title">Выбери день дедлайна</string>
+    <string name="unable_create_new_task">Не удалось создать новое задание</string>
+    <string name="btn_create_task">Создать</string>
+    <string name="unable_to_remove_done_tasks">Не удалось удалить выполненные задания</string>
+    <string name="tasks_title">Задания</string>
+    <string name="btn_remove_done_tasks">Удалить выполненные</string>
 </resources>

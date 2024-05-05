@@ -7,7 +7,6 @@ import net.openid.appauth.TokenRequest
 import ru.vaihdass.aikataulus.data.auth.TokenStorage
 import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import ru.vaihdass.aikataulus.domain.repository.AuthRepository
-import timber.log.Timber
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -38,9 +37,6 @@ class AuthRepositoryImpl @Inject constructor(
         tokenStorage.accessToken = tokens.accessToken.trim()
         tokenStorage.refreshToken = tokens.refreshToken.trim()
         tokenStorage.idToken = tokens.idToken.trim()
-
-
-        Timber.tag("Oauth").d("6. Tokens accepted:\n access=${tokens.accessToken}\nrefresh=${tokens.refreshToken}\nidToken=${tokens.idToken}")
     }
 
     companion object {

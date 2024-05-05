@@ -25,6 +25,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "AIKATAULUS_API_BASE_URL", "\"https://aikataulus.ru/\"")
+        buildConfigField("String", "AIKATAULUS_EXPORT_SCHEDULE_URL", "\"https://aikataulus.ru/ical_export\"")
         buildConfigField("String", "GOOGLE_TASKS_API_BASE_URL", "\"https://tasks.googleapis.com/\"")
 
         manifestPlaceholders["appAuthRedirectScheme"] = "ru.vaihdass.aikataulus"

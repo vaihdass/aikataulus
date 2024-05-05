@@ -48,7 +48,7 @@ class AuthFragment : BaseFragment(R.layout.fragment_auth) {
             }
         }
 
-        with (viewModel) {
+        with(viewModel) {
             loadingFlow.launchAndCollectIn(viewLifecycleOwner) { isLoading ->
                 updateIsLoading(isLoading)
             }
