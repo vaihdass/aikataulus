@@ -13,6 +13,7 @@ import ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesAssistedViewMo
 import ru.vaihdass.aikataulus.presentation.screen.greeting.CoursesFragment
 import ru.vaihdass.aikataulus.presentation.screen.greeting.OrganizationFragment
 import ru.vaihdass.aikataulus.presentation.screen.main.MainFragment
+import ru.vaihdass.aikataulus.presentation.screen.schedule.ScheduleFragment
 import ru.vaihdass.aikataulus.presentation.screen.settings.SettingsFragment
 import ru.vaihdass.aikataulus.presentation.screen.task.TaskAssistedViewModel
 import ru.vaihdass.aikataulus.presentation.screen.task.TaskFragment
@@ -52,4 +53,5 @@ interface AppComponent {
     fun taskEditAssistedViewModel(): TaskEditAssistedViewModel.Factory
     fun inject(fragment: TaskCreateFragment)
     fun inject(fragment: TasksFragment)
+    fun inject(fragment: ScheduleFragment)
 }

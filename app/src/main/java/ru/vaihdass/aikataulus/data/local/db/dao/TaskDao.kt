@@ -15,11 +15,14 @@ interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun update(task: TaskEntity)
 
+    @Query("UPDATE tasks SET id = :newId WHERE id = :oldId")
+    fun updateId(oldId: String, newId: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrUpdateAll(tasks: List<TaskEntity>)
 
-    @Delete
-    fun delete(task: TaskEntity)
+    @Query("DELETE FROM tasks WHERE id = :taskId")
+    fun delete(taskId: String)
 
     @Delete
     fun delete(tasks: List<TaskEntity>)
@@ -33,11 +36,29 @@ interface TaskDao {
     @Query("DELETE FROM tasks WHERE isDone = 1")
     fun deleteAllDone()
 
-    @Query("SELECT * FROM tasks WHERE saved = 0")
+    @Query("SELECT * FROM tasks WHERE saved = 0 AND deleted = 0 AND createdOffline = 0")
     fun getAllUnsaved(): List<TaskEntity>
 
-    @Query("SELECT * FROM tasks")
+    @Query("UPDATE tasks SET saved = 1 WHERE saved = 0 AND deleted = 0 AND createdOffline = 0")
+    fun markAllAsSaved()
+
+    @Query("SELECT * FROM tasks WHERE deleted = 1")
+    fun getAllDeletedUnsaved(): List<TaskEntity>
+
+    @Query("SELECT * FROM tasks WHERE createdOffline = 1")
+    fun getAllCreatedUnsaved(): List<TaskEntity>
+
+    @Query("UPDATE tasks SET saved = 1, createdOffline = 0 WHERE createdOffline = 1")
+    fun markAllCreatedOfflineAsSaved()
+
+    @Query("DELETE FROM tasks WHERE deleted = 1")
+    fun deleteAllDeleted()
+
+    @Query("SELECT * FROM tasks WHERE deleted = 0")
     fun getAll(): List<TaskEntity>
+
+    @Query("SELECT * FROM tasks WHERE id = :taskId")
+    fun getById(taskId: String): TaskEntity?
 
     @Query("SELECT * FROM tasks WHERE deadline >= :from AND deadline <= :to")
     suspend fun getAllFromTo(from: Long, to: Long): List<TaskEntity>

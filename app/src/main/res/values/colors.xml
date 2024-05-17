@@ -13,4 +13,12 @@
     <color name="colorTasksSecondary">#83204C</color>
     <color name="colorAppBar">?attr/backgroundColor</color>
     <color name="colorTasksButton">#C03773</color>
+    <color name="colorCalendarHeaderBg">#ECECF4</color>
+    <color name="colorCalendarHeaderBorder">#DEE3E6</color>
+    <color name="colorCalendarBg">#FAF9FE</color>
+    <color name="colorCalendarLegengText">#444750</color>
+    <color name="colorCalendarDayText">#1B1A20</color>
+    <color name="colorCalendarDayTextOtherMonth">#7B7E8C</color>
+    <color name="colorCalendarDayTextSelected">#141B2E</color>
+    <color name="colorCalendarDayBgSelected">#DCE2FA</color>
 </resources>

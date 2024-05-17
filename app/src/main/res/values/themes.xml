@@ -12,7 +12,7 @@
         <item name="colorSurfaceVariant">#E9DFEB</item>
         <item name="colorOutline">#7C757E</item>
         <item name="colorOutlineVariant">#CCC4CE</item>
-        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <item name="android:windowBackground">?attr/backgroundColor</item>
         <item name="backgroundColor">#FFF7FE</item>
         <item name="colorOnBackground">#606060</item>

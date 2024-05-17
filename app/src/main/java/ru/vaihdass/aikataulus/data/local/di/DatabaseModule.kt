@@ -18,6 +18,7 @@ class DatabaseModule {
             .addMigrations(
                 // TODO: Add migrations if needed
             )
+            .fallbackToDestructiveMigration()
             .build()
     }
 

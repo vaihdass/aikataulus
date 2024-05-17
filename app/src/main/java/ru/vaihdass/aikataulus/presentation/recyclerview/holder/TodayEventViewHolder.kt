@@ -24,7 +24,7 @@ class TodayEventViewHolder(
         this.item = item
 
         with(viewBinding) {
-            tvSubject.text = item.subject.trim().lowercase().replaceFirstChar { it.titlecase() }
+            tvSubject.text = item.subject.trim().replaceFirstChar { it.titlecase() }
             tvLocation.text = item.location?.trim() ?: ""
             tvTime.text = formatTimeRange(item.dateFrom, item.dateTo)
             tvType.text = (item.type?.trim() ?: "").lowercase().replaceFirstChar { it.titlecase() }

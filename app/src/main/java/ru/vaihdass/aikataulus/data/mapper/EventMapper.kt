@@ -1,8 +1,7 @@
 package ru.vaihdass.aikataulus.data.mapper
 
-import ru.vaihdass.aikataulus.data.local.db.entity.OrganizationEntity
+import ru.vaihdass.aikataulus.data.local.db.entity.EventEntity
 import ru.vaihdass.aikataulus.data.remote.pojo.aikataulus.Event
-import ru.vaihdass.aikataulus.data.remote.pojo.aikataulus.Organization
 import ru.vaihdass.aikataulus.domain.model.EventDomainModel
 import javax.inject.Inject
 
@@ -32,6 +31,19 @@ class EventMapper @Inject constructor() {
         )
     }
 
+    fun mapNotNull(event: EventEntity): EventDomainModel {
+        return EventDomainModel(
+            event.subject,
+            event.location,
+            event.type,
+            event.teacher,
+            event.calendarId,
+            event.calendarName,
+            event.dateFrom,
+            event.dateTo,
+        )
+    }
+
     fun map(eventDomainModel: EventDomainModel?): Event? {
         return eventDomainModel?.let { event ->
             Event(
@@ -47,16 +59,19 @@ class EventMapper @Inject constructor() {
         }
     }
 
-    fun mapToDbEntityNotNull(organization: Organization): OrganizationEntity {
-        return OrganizationEntity(
-            id = organization.id,
-            name = organization.name,
-        )
-    }
-
-    fun mapToDbEntities(response: List<Organization>?): List<OrganizationEntity>? {
-        return response?.let {
-            it.map { organization -> mapToDbEntityNotNull(organization) }
+    fun mapToDbEntitiesNotNull(events: List<Event>): List<EventEntity> {
+        return events.map { event ->
+            EventEntity(
+                id = 0,
+                subject = event.subject,
+                location = event.location,
+                type = event.type,
+                teacher = event.teacher,
+                calendarId = event.calendarId,
+                calendarName = event.calendarName,
+                dateFrom = event.dateFrom,
+                dateTo = event.dateTo,
+            )
         }
     }
 }

@@ -12,4 +12,6 @@ data class TaskEntity(
     var deadline: Date? = null,
     var isDone: Boolean = false,
     var saved: Boolean = true,
+    var deleted: Boolean = false,
+    var createdOffline: Boolean = false,
 )

@@ -62,6 +62,10 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 findNavController().navigate(R.id.action_mainFragment_to_settingsFragment)
             }
 
+            btnSchedule.setOnClickListener {
+                findNavController().navigate(R.id.action_mainFragment_to_scheduleFragment)
+            }
+
             btnTasks.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_tasksFragment)
             }

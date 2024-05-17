@@ -14,6 +14,9 @@ interface TasksRepository {
     suspend fun editTask(task: TaskDomainModel): TaskDomainModel
     suspend fun deleteTask(taskId: String)
     suspend fun removeDoneTasks()
+    suspend fun syncRemovedTasks()
+    suspend fun syncEditedTasks()
+    suspend fun syncCreatedTasks()
     suspend fun createTask(task: TaskDomainModel): TaskDomainModel
     fun isAuthorized(): Boolean
 }

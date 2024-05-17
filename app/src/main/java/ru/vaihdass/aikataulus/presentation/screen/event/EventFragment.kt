@@ -35,7 +35,7 @@ class EventFragment : BaseFragment(R.layout.fragment_event) {
         val event = args.event
 
         with(viewBinding) {
-            tvSubject.text = event.subject.trim().lowercase().replaceFirstChar { it.titlecase() }
+            tvSubject.text = event.subject.trim().replaceFirstChar { it.titlecase() }
 
             if (event.location == null) {
                 tvLocation.isVisible = false

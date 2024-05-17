@@ -7,7 +7,7 @@ import java.util.Date
 
 @Entity(tableName = "events")
 data class EventEntity(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val subject: String,
     val location: String? = null,
     val type: String? = null,
@@ -19,7 +19,6 @@ data class EventEntity(
 
 
 ) {
-    // Don't use database id while comparing
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

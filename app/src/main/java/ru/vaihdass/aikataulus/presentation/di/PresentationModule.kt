@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import ru.vaihdass.aikataulus.presentation.screen.auth.AuthViewModel
 import ru.vaihdass.aikataulus.presentation.screen.greeting.OrganizationViewModel
 import ru.vaihdass.aikataulus.presentation.screen.main.MainViewModel
+import ru.vaihdass.aikataulus.presentation.screen.schedule.ScheduleViewModel
 import ru.vaihdass.aikataulus.presentation.screen.settings.SettingsViewModel
 import ru.vaihdass.aikataulus.presentation.screen.taskcreate.TaskCreateViewModel
 import ru.vaihdass.aikataulus.presentation.screen.tasks.TasksViewModel
@@ -49,4 +50,8 @@ class PresentationModule {
     @Provides
     @[IntoMap ViewModelKey(TasksViewModel::class)]
     fun provideTasksViewModel(viewModel: TasksViewModel): ViewModel = viewModel
+
+    @Provides
+    @[IntoMap ViewModelKey(ScheduleViewModel::class)]
+    fun provideScheduleViewModel(viewModel: ScheduleViewModel): ViewModel = viewModel
 }

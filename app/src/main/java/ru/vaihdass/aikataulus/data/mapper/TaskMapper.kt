@@ -29,6 +29,16 @@ class TaskMapper @Inject constructor() {
         )
     }
 
+    fun mapNotNull(task: TaskEntity): TaskDomainModel {
+        return TaskDomainModel(
+            id = task.id,
+            subject = task.subject,
+            task = task.task,
+            deadline = task.deadline,
+            isDone = task.isDone,
+        )
+    }
+
     fun map(taskDomainModel: TaskDomainModel?): Task? {
         return taskDomainModel?.let { task -> mapNotNull(task) }
     }
@@ -55,7 +65,12 @@ class TaskMapper @Inject constructor() {
         )
     }
 
-    fun mapToDbEntityNotNull(task: TaskDomainModel, saved: Boolean = true): TaskEntity {
+    fun mapToDbEntityNotNull(
+        task: TaskDomainModel,
+        saved: Boolean = true,
+        createdOffline: Boolean = false,
+        deleted: Boolean = false,
+    ): TaskEntity {
         return TaskEntity(
             id = task.id,
             subject = task.subject,
@@ -63,13 +78,13 @@ class TaskMapper @Inject constructor() {
             deadline = task.deadline,
             isDone = task.isDone,
             saved = saved,
+            deleted = deleted,
+            createdOffline = createdOffline,
         )
     }
 
-    fun mapToDbEntities(response: List<Task>?): List<TaskEntity>? {
-        return response?.let {
-            it.map { task -> mapToDbEntityNotNull(task) }
-        }
+    fun mapToDbEntities(response: List<Task>): List<TaskEntity> {
+        return response.map { task -> mapToDbEntityNotNull(task) }
     }
 
     fun fromDbEntities(tasks: List<TaskEntity>) = tasks.map { task ->

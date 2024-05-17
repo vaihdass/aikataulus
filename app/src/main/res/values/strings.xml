@@ -39,7 +39,7 @@
     <string name="fab_create_task">Task</string>
     <string name="today">Today</string>
     <string name="edit_task">Edit the task</string>
-    <string name="unable_to_get_task">Unable to get task from the server</string>
+    <string name="unable_to_get_task">Unable to get task</string>
     <string name="without_a_deadline">Without a deadline</string>
     <string name="time_today">Today</string>
     <string name="time_yesterday">Yesterday</string>
@@ -61,5 +61,7 @@
     <string name="unable_to_remove_done_tasks">Unable to remove done tasks from the server, please try again later</string>
     <string name="tasks_title">Tasks</string>
     <string name="btn_remove_done_tasks">Remove done</string>
-    <string name="unable_to_delete_task">Unable to delete task, please try again...</string>
+    <string name="unable_to_delete_task">Unable to delete task, please try again…</string>
+    <string name="incorrect_peek_event_from_to_date">Incorrect event\'s from and to dates</string>
+    <string name="unexpected_exception_due_editing_task">Unexpected exception due editing task</string>
 </resources>

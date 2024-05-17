@@ -20,4 +20,12 @@ class GetEventsUseCase @Inject constructor(
             eventsRepository.getTodayEvents(calendarIds = calendars).toUiModelList()
         }
     }
+
+    suspend fun getAllEvents(): List<EventUiModel> {
+        return withContext(dispatcher) {
+            val calendars = aikataulusRepository.getAllSavedCalendarIds()
+
+            eventsRepository.getAllEvents(calendarIds = calendars).toUiModelList()
+        }
+    }
 }

@@ -59,4 +59,7 @@
     <string name="unable_to_remove_done_tasks">Не удалось удалить выполненные задания</string>
     <string name="tasks_title">Задания</string>
     <string name="btn_remove_done_tasks">Удалить выполненные</string>
+    <string name="unable_to_delete_task">Не удалось удалить задание</string>
+    <string name="incorrect_peek_event_from_to_date">Некорректные даты мероприятия</string>
+    <string name="unexpected_exception_due_editing_task">Не удалось отредактировать задачу, изменена другим клиентом</string>
 </resources>

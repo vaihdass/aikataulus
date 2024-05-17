@@ -11,6 +11,7 @@ import ru.vaihdass.aikataulus.data.auth.TokenStorage
 import ru.vaihdass.aikataulus.data.local.pref.AikataulusSharedPreferencesManager
 import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import ru.vaihdass.aikataulus.utils.ResManager
+import timber.log.Timber
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -26,35 +27,30 @@ class AuthorizationFailedInterceptor @Inject constructor(
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequestTimestamp = System.currentTimeMillis()
         val originalResponse = chain.proceed(chain.request())
-        return originalResponse.takeIf { it.code != 401 } ?: handleUnauthorizedResponse(
-            chain,
-            originalResponse,
-            originalRequestTimestamp
-        )
+        return if (originalResponse.code != 401) {
+            originalResponse
+        } else {
+            handleUnauthorizedResponse(chain, originalResponse, originalRequestTimestamp)
+        }
     }
 
     private fun handleUnauthorizedResponse(
         chain: Interceptor.Chain, originalResponse: Response, requestTimestamp: Long
     ): Response {
         val latch = getLatch()
-        return when {
-            latch != null && latch.count > 0 -> handleTokenIsUpdating(
-                chain, latch, requestTimestamp
-            ) ?: originalResponse
-
-            tokenUpdateTime > requestTimestamp -> updateTokenAndProceedChain(chain)
-            else -> handleTokenNeedRefresh(chain) ?: originalResponse
+        return if (latch != null && latch.count > 0) {
+            handleTokenIsUpdating(chain, latch, requestTimestamp) ?: originalResponse
+        } else if (tokenUpdateTime > requestTimestamp) {
+            updateTokenAndProceedChain(chain)
+        } else {
+            handleTokenNeedRefresh(chain) ?: originalResponse
         }
     }
 
     private fun handleTokenIsUpdating(
         chain: Interceptor.Chain, latch: CountDownLatch, requestTimestamp: Long
     ): Response? {
-        return if (latch.await(
-                REQUEST_TIMEOUT,
-                TimeUnit.SECONDS
-            ) && tokenUpdateTime > requestTimestamp
-        ) {
+        return if (latch.await(REQUEST_TIMEOUT, TimeUnit.SECONDS) && tokenUpdateTime > requestTimestamp) {
             updateTokenAndProceedChain(chain)
         } else {
             null
@@ -83,15 +79,15 @@ class AuthorizationFailedInterceptor @Inject constructor(
 
         val tokenRefreshed = runBlocking {
             runCatching {
-                val refreshRequest =
-                    appAuth.getRefreshTokenRequest(tokenStorage.refreshToken.orEmpty())
+                val refreshRequest = appAuth.getRefreshTokenRequest(tokenStorage.refreshToken.orEmpty())
                 appAuth.performTokenRequestSuspend(authorizationService, refreshRequest)
-            }.getOrNull()?.let { tokens ->
+            }.onSuccess { tokens ->
                 tokenStorage.accessToken = tokens.accessToken
                 tokenStorage.refreshToken = tokens.refreshToken
                 tokenStorage.idToken = tokens.idToken
-                true
-            } ?: false
+            }.onFailure {
+                Timber.tag("Oauth").d("Exception due performing refresh request: $it")
+            }.getOrNull() != null
         }
 
         if (tokenRefreshed) {
@@ -103,14 +99,18 @@ class AuthorizationFailedInterceptor @Inject constructor(
             preferencesManager.putString(PREF_GOOGLE_TASKS_LIST_ID, "")
             preferencesManager.putBoolean(PREF_IS_CALENDARS_SELECTED, false)
         }
+
         getLatch()?.countDown()
         return tokenRefreshed
     }
 
     private fun updateOriginalCallWithNewToken(request: Request): Request {
-        return tokenStorage.accessToken?.let { newAccessToken ->
+        val newAccessToken = tokenStorage.accessToken
+        return if (newAccessToken != null) {
             request.newBuilder().header("Authorization", newAccessToken).build()
-        } ?: request
+        } else {
+            request
+        }
     }
 
     companion object {
@@ -123,7 +123,9 @@ class AuthorizationFailedInterceptor @Inject constructor(
 
         @Synchronized
         fun initLatch() {
-            countDownLatch = CountDownLatch(1)
+            if (countDownLatch == null || countDownLatch?.count == 0L) {
+                countDownLatch = CountDownLatch(1)
+            }
         }
 
         @Synchronized
