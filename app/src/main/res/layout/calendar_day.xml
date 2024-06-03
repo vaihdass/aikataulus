@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorCalendarHeaderBg">
     <TextView
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/tv_day_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
+        android:layout_marginHorizontal="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="1dp"
         android:gravity="center"
         android:textColor="@color/colorCalendarDayText"
         android:textSize="16sp"
         tools:background="@color/colorCalendarHeaderBg"
         tools:text="11" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="5dp"
+        android:orientation="horizontal">
+        <View
+            android:id="@+id/has_event"
+            android:visibility="invisible"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginEnd="2dp"
+            android:backgroundTint="@color/colorSchedulePrimary"
+            android:background="@drawable/schedule_marker_dot_bg"/>
+        <View
+            android:id="@+id/has_task"
+            android:visibility="invisible"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:backgroundTint="@color/colorTasksPrimary"
+            android:background="@drawable/schedule_marker_dot_bg"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

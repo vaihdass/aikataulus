@@ -145,6 +145,8 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
         val monthToWeek = !isMonthMode
 
         with(viewBinding) {
+            tvDate.postDelayed({ updateTitle() }, 500L)
+
             // Scroll to the position on the target calendar
             if (monthToWeek) {
                 val targetDate = calendarMonth.findFirstVisibleDay()?.date ?: return
@@ -188,8 +190,9 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                     calendarWeek.isVisible = true
                     calendarMonth.isGone = true
                 } else {
-                    calendarMonth.updateLayoutParams { height =
-                        ViewGroup.LayoutParams.WRAP_CONTENT
+                    calendarMonth.updateLayoutParams {
+                        height =
+                            ViewGroup.LayoutParams.WRAP_CONTENT
                     }
                 }
 
@@ -213,10 +216,31 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
             val startMonth = currentMonth.minusMonths(100)
             val endMonth = currentMonth.plusMonths(100)
 
-            setupMonthCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
-            setupWeekCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
+            nsvSchedule.isVisible = false
+            tvAppTitle.isVisible = true
+            pbSchedule.isVisible = true
 
-            updateTitle()
+            layoutCalendars.postDelayed({
+                setupMonthCalendar(
+                    startMonth,
+                    endMonth,
+                    currentMonth,
+                    daysOfWeek
+                )
+
+                setupWeekCalendar(
+                    startMonth,
+                    endMonth,
+                    currentMonth,
+                    daysOfWeek
+                )
+
+                nsvSchedule.isVisible = true
+                tvAppTitle.isVisible = false
+                pbSchedule.isVisible = false
+            }, 1_400L)
+
+            tvDate.postDelayed({ updateTitle() }, 1_550L)
         }
     }
 
@@ -228,7 +252,8 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
     ) {
         class WeekDayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: WeekDay
-            val textView = CalendarDayBinding.bind(view).tvDayText
+            val containerBinding = CalendarDayBinding.bind(view)
+            val textView = containerBinding.tvDayText
 
             init {
                 view.setOnClickListener {
@@ -246,7 +271,7 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                     container.day = data
                     bindDate(
                         data.date,
-                        container.textView,
+                        container.containerBinding,
                         data.position == WeekDayPosition.RangeDate,
                     )
                 }
@@ -272,7 +297,8 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
     ) {
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay
-            val textView = CalendarDayBinding.bind(view).tvDayText
+            val containerBinding = CalendarDayBinding.bind(view)
+            val textView = containerBinding.tvDayText
 
             init {
                 view.setOnClickListener {
@@ -289,7 +315,11 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
 
                 override fun bind(container: DayViewContainer, data: CalendarDay) {
                     container.day = data
-                    bindDate(data.date, container.textView, data.position == DayPosition.MonthDate)
+                    bindDate(
+                        data.date,
+                        container.containerBinding,
+                        data.position == DayPosition.MonthDate
+                    )
                 }
             }
 
@@ -305,8 +335,16 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
         }
     }
 
-    private fun bindDate(date: LocalDate, textView: TextView, isSelectable: Boolean) {
+    private fun bindDate(
+        date: LocalDate,
+        containerBinding: CalendarDayBinding,
+        isSelectable: Boolean
+    ) {
+        val textView = containerBinding.tvDayText
         textView.text = date.dayOfMonth.toString()
+
+        containerBinding.hasEvent.isVisible = viewModel.hasEvents(date)
+        containerBinding.hasTask.isVisible = viewModel.hasTasks(date)
 
         if (isSelectable) {
             when {
@@ -344,7 +382,7 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                     tvDate.text = firstDate.month.displayText(short = true)
                 } else {
                     tvDate.text = firstDate.month.displayText(short = true) + " — " +
-                        lastDate.month.displayText(short = true)
+                            lastDate.month.displayText(short = true)
                 }
             }
         }
