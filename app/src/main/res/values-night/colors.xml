@@ -4,11 +4,12 @@
     <color name="colorTasksPrimary">#CC4580</color>
     <color name="colorTasksSecondary">#9A315F</color>
     <color name="colorTasksButton">#616E8C</color>
-    <color name="colorCalendarHeaderBg">#ECECF4</color>
-    <color name="colorCalendarHeaderBorder">#ECECF2</color>
-    <color name="colorCalendarBg">#FAF9FE</color>
-    <color name="colorCalendarLegengText">#444750</color>
-    <color name="colorCalendarDayText">#1B1A20</color>
-    <color name="colorCalendarDayTextSelected">#1B1A20</color>
-    <color name="colorCalendarDayBgSelected">#DCE2FA</color>
+    <color name="colorCalendarHeaderBg">#111123</color>
+    <color name="colorCalendarHeaderBorder">#1D1D35</color>
+    <color name="colorCalendarBg">#090214</color>
+    <color name="colorCalendarLegengText">#7B8B9C</color>
+    <color name="colorCalendarDayText">#7B8B9C</color>
+    <color name="colorCalendarDayTextOtherMonth">#333C53</color>
+    <color name="colorCalendarDayTextSelected">#090214</color>
+    <color name="colorCalendarDayBgSelected">#59B5F7</color>
 </resources>

@@ -102,6 +102,10 @@ class TaskCreateFragment : BaseFragment(R.layout.fragment_task_create) {
             btnCreate.setOnClickListener {
                 btnCreate.isEnabled = false
 
+                lifecycleScope.launch {
+                    taskChangedFlow.emit(Unit)
+                }
+
                 val task = TaskUiModel(
                     id = "",
                     subject = etSubject.text.toString().trim().lowercase()

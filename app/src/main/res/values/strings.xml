@@ -64,4 +64,7 @@
     <string name="unable_to_delete_task">Unable to delete task, please try again…</string>
     <string name="incorrect_peek_event_from_to_date">Incorrect event\'s from and to dates</string>
     <string name="unexpected_exception_due_editing_task">Unexpected exception due editing task</string>
+    <string name="date_and_week_day_title" translatable="false">%1$s, %2$s</string>
+    <string name="no_events_today">No events today</string>
+    <string name="no_tasks_today">No tasks today</string>
 </resources>

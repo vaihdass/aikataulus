@@ -65,6 +65,7 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
             }
 
             fabRemoveTask.setOnClickListener {
+                lifecycleScope.launch { taskChangedFlow.emit(Unit) }
                 viewModel.removeTask()
             }
 
@@ -76,6 +77,8 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
             }
 
             fabDoneTask.setOnClickListener {
+                lifecycleScope.launch { taskChangedFlow.emit(Unit) }
+
                 if (viewModel.task.isDone) {
                     viewModel.task.isDone = false
 
@@ -125,6 +128,7 @@ class TaskFragment : BaseFragment(R.layout.fragment_task) {
         with(viewModel) {
             taskFlow.observe { task ->
                 lifecycleScope.launch {
+                    taskChangedFlow.emit(Unit)
                     bindTask(task)
                 }
             }

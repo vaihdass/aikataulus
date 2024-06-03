@@ -62,4 +62,6 @@
     <string name="unable_to_delete_task">Не удалось удалить задание</string>
     <string name="incorrect_peek_event_from_to_date">Некорректные даты мероприятия</string>
     <string name="unexpected_exception_due_editing_task">Не удалось отредактировать задачу, изменена другим клиентом</string>
+    <string name="no_events_today">Нет мероприятий на сегодня</string>
+    <string name="no_tasks_today">Нет заданий на сегодня</string>
 </resources>

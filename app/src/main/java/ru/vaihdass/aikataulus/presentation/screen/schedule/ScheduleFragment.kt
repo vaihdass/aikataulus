@@ -36,6 +36,7 @@ import ru.vaihdass.aikataulus.presentation.base.BaseFragment
 import ru.vaihdass.aikataulus.presentation.base.appComponent
 import ru.vaihdass.aikataulus.presentation.base.toastShort
 import ru.vaihdass.aikataulus.presentation.recyclerview.adapter.TodayEventsAdapter
+import ru.vaihdass.aikataulus.presentation.recyclerview.adapter.TodayTasksAdapter
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
@@ -77,7 +78,15 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                 findNavController().navigate(action)
             }
 
+            viewModel.tasksAdapter = TodayTasksAdapter { task ->
+                val action = ScheduleFragmentDirections
+                    .actionScheduleFragmentToTaskFragment(task = task)
+
+                findNavController().navigate(action)
+            }
+
             rvEvents.adapter = viewModel.eventsAdapter
+            rvTasks.adapter = viewModel.tasksAdapter
         }
     }
 
@@ -94,6 +103,10 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
         with(viewModel) {
             eventsFlow.observe { events ->
                 eventsAdapter.setItems(events)
+            }
+
+            tasksFlow.observe { tasks ->
+                tasksAdapter.setItems(tasks)
             }
 
             errorFlow.observe {
@@ -120,7 +133,11 @@ class ScheduleFragment : BaseFragment(R.layout.fragment_schedule) {
                 calendarWeek.notifyDateChanged(oldDay)
             }
 
+            viewModel.eventsAdapter.setItems(emptyList())
+            viewModel.tasksAdapter.setItems(emptyList())
+
             viewModel.fetchEventsByDate(date)
+            viewModel.fetchTasksByDate(date)
         }
     }
 

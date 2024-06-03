@@ -4,11 +4,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import net.openid.appauth.AuthorizationService
 import ru.vaihdass.aikataulus.R
 import ru.vaihdass.aikataulus.data.ExceptionHandlerDelegate
-import ru.vaihdass.aikataulus.data.auth.TokenStorage
-import ru.vaihdass.aikataulus.data.remote.api.AuthApi
 import ru.vaihdass.aikataulus.data.runCatching
 import ru.vaihdass.aikataulus.domain.usecase.GetEventsUseCase
 import ru.vaihdass.aikataulus.domain.usecase.GetTasksUseCase
@@ -41,7 +38,6 @@ class MainViewModel @Inject constructor(
         get() = _tasksFlow.asStateFlow()
     val eventsAdapter
         get() = _eventsAdapter ?: throw IllegalStateException("Events adapter should be initialized")
-
     val tasksAdapter
         get() = _tasksAdapter ?: throw IllegalStateException("Events adapter should be initialized")
 
