@@ -189,11 +189,12 @@
             app:layout_constraintEnd_toStartOf="@id/tv_empty_events"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty_events"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/iv_empty_events"
             app:layout_constraintEnd_toEndOf="parent"
@@ -241,11 +242,12 @@
             app:layout_constraintEnd_toStartOf="@id/tv_empty_tasks"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty_tasks"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/iv_empty_tasks"
             app:layout_constraintEnd_toEndOf="parent"

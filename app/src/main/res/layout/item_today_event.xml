@@ -23,6 +23,8 @@
         android:textColor="?attr/backgroundColor"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="8"
+        android:layout_marginEnd="4dp"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -40,6 +42,7 @@
         android:textColor="?attr/backgroundColor"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="4"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -57,6 +60,7 @@
         android:textColor="?attr/backgroundColor"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="3"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -75,5 +79,6 @@
         android:textColor="?attr/backgroundColor"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="6"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

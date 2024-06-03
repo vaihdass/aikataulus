@@ -24,6 +24,7 @@
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="6"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -42,6 +43,7 @@
         android:textColor="?attr/backgroundColor"
         android:ellipsize="end"
         android:maxLines="1"
+        app:layout_constraintHorizontal_weight="4"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
